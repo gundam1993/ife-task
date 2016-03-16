@@ -1,25 +1,24 @@
 body
 {
 	background-color:#dedede;
-}
-p
-{
 	font-size: 15px;
-	text-indent: 30px;
+	font-family: "Microsoft YaHei UI", sans-serif;
+	margin: 0;
+	padding: 0;
+}
+h2
+{
+	font-weight: normal;
 }
 .bar
 {
 	background-color: #202020;
-	width: 100%;
 	height: 60px;
-	position: absolute;
-	top: 0;
-	left: 0;
-	padding: 0;
+	width: 100%;
+	min-width: 720px;
 }
 .bar ul
 {
-	list-style-type: none;
 	padding: 0;
 	margin: 0;
 	float: right;
@@ -27,18 +26,26 @@ p
 .bar li
 {
 	display: inline;
+	line-height: 60px;
+	width: 100px;
+	margin-right: 15px;
 }
-.bar a:link
+.bar a
 {
+	text-decoration: none;
+	font-size: 12px;
+	font-weight: lighter;
 	color: #fff;
 }
 .bar a:hover
 {
 	color: #dedede;
 }
-.bar a:visited
+.logo
 {
-	color: #dedede;
+	margin-left: 25px;
+	float: left;
+	height: 65px;
 }
 .main-block
 {
@@ -46,7 +53,138 @@ p
 	width: 94%;
 	margin: auto;
 	margin-top: 20px;
-	padding: 30px;
+	padding: 20px;
 	border-color: white;
 	box-shadow: 5px 5px 3px #888; 
+}
+.main-block ul
+{
+	list-style-type: none;
+}
+.title2
+{
+	color: #959595;
+	font-size: 15px;
+}
+.auther
+{
+	color: #959595;
+	font-size: 12px;
+}
+.article
+{
+	text-indent: 30px;
+}
+.img-box
+{
+	border:1px solid #dedede;
+	width: 110px;
+	margin: 15px;
+	margin-left: 40px;
+}
+.img-box img
+{
+	height: 50px;
+	margin: auto;
+	margin-top: 10px;
+}
+.img-box p
+{
+	margin: auto;
+	text-align: center;
+	margin-bottom: 10px;
+	margin-top: 5px;
+}
+table
+{
+	border-collapse: collapse;
+	width: 100%;
+	margin: auto;
+}
+td
+{
+	border: 1px solid #dedede;
+
+}
+.tline1
+{
+	background-color: #202020;
+	color: white;
+}
+.tline6
+{
+	background-color: #dedede;
+}
+aside
+{
+	font-size: 13px;
+	background-color: #fff;
+	width: 94%;
+	margin: auto;
+	margin-top: 40px;
+	padding: 20px;
+	border-color: white;
+	box-shadow: 5px 5px 3px #888; 
+}
+aside h2
+{
+	font-size: 17px;
+	font-weight: bold;
+	border-left: 3px solid #ccc;
+	padding-left: 2px;
+	line-height: 35px;
+}
+form
+{
+	display: block;
+	margin-bottom: 10px;
+}
+form div
+{
+	margin-top: 10px;
+}
+.remind
+{
+	color: #959595;
+	width: 41%;
+	text-align: right;
+}
+.input-tip
+{
+	display: inline-block;
+	padding: 0 10px;
+	vertical-align: middle;
+	text-align: right;
+	width: 30%;
+	vertical-align: top;
+}
+
+textarea
+{
+	width: 60%;
+	height: 75px;
+	flex-direction: column;
+}
+input[type='submit']
+{
+	width: 98%;
+	height: 35px;
+	font-size: 15px;
+	margin: auto;
+	color: white;
+	background-color: #1a62e2;
+	border-style: none;
+	border-radius: 5px;
+}
+footer
+{
+	background-color: #202020;
+	height: 60px;
+	width: 100%;
+	min-width: 720px;
+	margin-top: 20px;
+	color: white;
+	font-size: 13px;
+	text-align: center;
+	padding-top: 10px;
 }
