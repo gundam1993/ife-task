@@ -1,0 +1,31 @@
+img
+{
+	width: 80px;
+	height: 80px;
+	margin: 5px auto;
+}
+.main-block
+{
+	background-color: #eee;
+	border: 1px solid #999;
+	padding: 20px;
+	margin: auto;
+}
+.logo-block
+{
+	background-color: white;
+	width: 200px;
+	padding: 20px;
+}
+#team-name
+{
+	float: right;
+	font-size: 17px;
+}
+.peasonal-logo-block
+{
+	width: 120px;
+	padding: 20px;
+	background-color: white;
+	display: block;
+}
