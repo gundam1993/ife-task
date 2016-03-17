@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 img
 {
 	width: 80px;
@@ -38,3 +39,45 @@ section
 	width: 80px;
 	float: right;
 }
+=======
+img
+{
+	width: 80px;
+	height: 80px;
+	margin: 5px 0;
+}
+.box
+{
+	background-color: white;
+	border: 1px solid #999;
+	padding: 20px;
+}
+.main-block
+{
+	background-color: #eee;
+	border: 1px solid #999;
+	padding: 20px;
+	margin: 15px;
+	overflow: auto;
+}
+.logo-block
+{
+	width: 160px;
+	float: left;
+}
+#team-name
+{
+	float: right;
+	font-size: 15px;
+}
+section
+{
+	margin-left: 220px;
+	margin-right: 140px;
+}
+.member
+{
+	width: 80px;
+	float: right;
+}
+>>>>>>> 1ed78477419048916ea4a1203bf4b774904a6d45
