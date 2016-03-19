@@ -1,0 +1,225 @@
+/*全局*/
+html,body
+{
+	background-color:#dedede;
+	font-size: 15px;
+	font-family: "Microsoft YaHei UI", sans-serif;
+	margin: 0;
+	padding: 0;
+	overflow: auto;
+}
+h2
+{
+	font-weight: normal;
+}
+img
+{
+	height: 200px;
+}
+/*导航栏*/
+.bar
+{
+	background-color: #202020;
+	height: 60px;
+	width: 100%;
+	min-width: 720px;
+}
+.bar ul
+{
+	padding: 0;
+	margin: 0;
+	float: right;
+}
+.bar li
+{
+	display: inline;
+	line-height: 60px;
+	width: 100px;
+	margin-right: 15px;
+}
+.bar a
+{
+	text-decoration: none;
+	font-size: 12px;
+	font-weight: lighter;
+	color: #fff;
+}
+.bar a:hover
+{
+	color: #dedede;
+}
+.logo
+{
+	margin-left: 25px;
+	float: left;
+	height: 65px;
+}
+/*主体*/
+article
+{
+	overflow: auto;
+	margin-left: 20px;
+	margin-right: 390px;
+	margin-top: -4px;
+	float: left;
+	padding-right: 5px;
+	justify-content: center;
+}
+.main-block
+{
+	background-color: #fff;
+	margin: auto;
+	margin-top: 20px;
+	padding: 20px;
+	border-color: #959595;
+	box-shadow: 5px 5px 3px #888; 
+}
+.main-block ul
+{
+	list-style-type: none;
+}
+.title2
+{
+	color: #959595;
+	font-size: 15px;
+}
+.auther
+{
+	color: #959595;
+	font-size: 12px;
+}
+.article
+{
+	text-indent: 30px;
+}
+.gallery
+{
+	overflow: auto;
+}
+.img-box
+{
+	border:1px solid #dedede;
+	width: 110px;
+	margin: 15px;
+	float: left;
+}
+.img-box img
+{
+	height: 50px;
+	margin: auto;
+	margin-top: 10px;
+}
+.img-box p
+{
+	margin: auto;
+	text-align: center;
+	margin-bottom: 10px;
+	margin-top: 5px;
+}
+table
+{
+	border-collapse: collapse;
+	width: 100%;
+	margin: auto;
+}
+td
+{
+	border: 1px solid #dedede;
+
+}
+.tline1
+{
+	background-color: #202020;
+	color: white;
+}
+.tline6
+{
+	background-color: #dedede;
+}
+/*侧边栏*/
+aside
+{
+	font-size: 13px;
+	background-color: #fff;
+	width: 320px;
+	padding: 20px;
+	border-color: white;
+	box-shadow: 5px 5px 3px #888; 
+	position: absolute;
+	top: 80px;
+	right: 20px;
+}
+aside h2
+{
+	font-size: 17px;
+	font-weight: bold;
+	border-left: 3px solid #ccc;
+	padding-left: 2px;
+	line-height: 35px;
+}
+form
+{
+	display: block;
+	margin-bottom: 10px;
+}
+form div
+{
+	margin-top: 10px;
+}
+.remind
+{
+	color: #959595;
+	text-align: right;
+	margin-right: 25px;
+}
+.input-tip
+{
+	display: inline-block;
+	padding: 0 10px;
+	text-align: right;
+	width: 35%;
+	vertical-align: top;
+}
+
+textarea
+{
+	width: 55%;
+	height: 75px;
+	flex-direction: column;
+}
+input[type='submit']
+{
+	width: 98%;
+	height: 35px;
+	font-size: 15px;
+	margin: auto;
+	color: white;
+	background-color: #1a62e2;
+	border-style: none;
+	border-radius: 5px;
+}
+/*页脚*/
+footer
+{
+	background-color: #202020;
+	height: 60px;
+	width: 100%;
+	min-width: 720px;
+	margin-top: 20px;
+	color: white;
+	font-size: 13px;
+	text-align: center;
+	padding-top: 10px;
+	float: left;
+}
+@media screen and (max-width: 800px) {
+	aside
+	{
+		position: static;
+		margin: 15px auto;
+	}
+	article
+	{
+		margin-right: 20px;
+	}
+}
