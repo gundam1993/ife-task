@@ -1,0 +1,235 @@
+
+* {
+    font-family: "SimHei", "Arial", "Verdana", "Tahoma", sans-serif;
+    /*默认的margin不是0
+    需要在body中先清零之后,宽度100%的控件才能占满页面全部宽度*/
+    padding: 0;
+    border: 0;
+    margin: 0;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;
+}
+
+a {
+    color: #337ab7;
+    text-decoration: none;
+}
+
+.header {
+    height: 80px;
+    /* 让导航栏的蓝色背景占据全部宽度 */
+    width: 100%;
+    background-color: #337ab7;
+}
+
+.navbar {
+    height: 100%;
+    /* 导航栏内容区域左右留空 */
+    width: 70%;
+    /* 上下无边距,左右居中 */
+    margin: 0 auto;
+}
+
+.navbar-header {
+    /* logo图标浮动在最左侧 */
+    float: left;
+}
+
+.navbar-header img {
+    /* 如果要缩放图片,需将一个边的px设置好之后,另一个边设置为auto才行 */
+    height: 80px;
+    width: auto;
+    /* 根据导航栏的高度 让图片上下居中 */
+    padding: 15px;
+}
+
+.navbar-nav {
+    /* 导航栏ul紧接着logo左浮动 */
+    float: left;
+    /* 不显示li元素的列表符号 */
+    list-style-type: none;
+}
+
+.navbar-nav li {
+    /* li元素在ul内部左浮动 */
+    float: left;
+    /* 设置每个li元素等宽,并且文字居中显示 */
+    width: 100px;
+    text-align: center;
+    /* 元素高度等于行高,文字就能垂直居中 */
+    height: 80px;
+    line-height: 80px;
+    font-size: 20px;
+}
+
+.navbar-nav li a {
+    /* 设置a标签中文本的样式 */
+    color: #fff;
+    text-align: center;
+}
+
+.navbar-nav .user-dropdown {
+    position: absolute;
+    right: 15%;
+    /* 上面为li元素统一设置的宽度太小,这里对于本标签专门加宽 */
+    width: 250px;
+    font-size: 16px;
+}
+
+.nav-title {
+    /* 设置顶部面包屑导航和导航栏一样只占页面70%宽度,左右居中 */
+    width: 70%;
+    margin-left: 15%;
+    /* 与顶部导航栏之间留出距离 */
+    margin-top: 20px;
+    /* 设置圆角矩形 */
+    border-radius: 4px;
+    /* 设置颜色,字号及文字缩进 */
+    background-color: #f5f5f5;
+    font-size: 21px;
+    text-indent: 1em;
+    /* 设置文字垂直居中 */
+    height: 40px;
+    line-height: 40px;
+}
+
+.nav-title span {
+    color: #777;
+}
+
+.task-detail {
+    width: 53%;
+    margin-left: 15%;
+    margin-top: 20px;
+    /* 要实现Bootstrap那样的栅格系统,简单地用float即可 */
+    float: left;
+}
+
+dl {
+    line-height: 1.2em;
+}
+
+dl dt {
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 22px;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    font-weight: normal;
+}
+
+p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    line-height: 1.3em;
+}
+
+.task-detail li {
+    /* 让列表项的符号显示在边界内 */
+    list-style-position: inside;
+    /* 默认行距偏小,适当增大更美观一些 */
+    line-height: 1.4em;
+}
+
+table {
+    width: 100%;
+    line-height: 20px;
+}
+
+thead {
+    border: 1px solid #333;
+}
+
+thead tr {
+    color: rgba(0, 0, 0, .7);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.group-name {
+    width: 30%;
+    text-align: left;
+    padding: 10px 10px 10px 0;
+}
+
+.submit-time {
+    width: 30%;
+    text-align: left;
+    padding: 10px 10px 10px 0;
+}
+
+.score {
+    width: 20%;
+    text-align: right;
+    padding: 10px 10px 10px 0;
+}
+
+.group-page-wrap {
+    margin: 20px 0;
+}
+
+.pagination {
+    list-style-type: none;
+    /* 因为pagination这个ul中的li均为float,这个ul的高度就会被折叠为0
+     所以需要下面的语句使得ul有正常的高度*/
+    overflow: hidden;
+}
+
+.pagination li a {
+    padding: 6px 12px;
+    border: 1px solid #ddd;
+    /* 不用display来设置水平排列,改用float,蛋疼 */
+    position: relative;
+    float: left;
+}
+
+.review {
+    width: 20%;
+    text-align: center;
+    padding: 10px 0 10px 0;
+}
+
+.task-overview {
+    width: 17%;
+    float: left;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.task-op button {
+    background-color: #337ab7;
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+}
+
+.task-basic .key {
+    font-weight: 700;
+}
+
+.task-basic .value {
+    color: #777;
+}
+
+.footer {
+    height: 100px;
+    width: 100%;
+    padding: 10px 0;
+    /* 由于正文内容只占据了页面70%的宽度,并且为float定位
+     所以需要让页脚内容两侧无float内容,故需clear语句 */
+    clear: both;
+    background-color: #5a5a5a;
+    margin-top: 20px;
+    font-size: 14px;
+    text-align: center;
+    color: #fff;
+}
+
+.footer a {
+    color: #fff;
+}
+
