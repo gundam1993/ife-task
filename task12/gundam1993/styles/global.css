@@ -1,0 +1,120 @@
+@charset:"utf-8";
+/*全局*/
+html,body
+{
+	margin: 10px;
+}
+/*表格*/
+table,th,td
+{
+	border-collapse: collapse;
+	border-spacing: 0;
+	margin: 0;
+	font-size: 20px;
+	height: 40px;
+	text-align: center;
+}
+table
+{
+	width: 280px;
+}
+thead
+{
+	background-color: black;
+	color: white;
+}
+tbody>tr:nth-of-type(even)
+{
+	background-color: #ccc;
+}
+tbody>tr:nth-of-type(odd)
+{
+	background-color: white;
+}
+tbody>tr:nth-child(1),tbody>tr:nth-child(2),tbody>tr:nth-child(3)
+{
+	color: red;
+}
+/*输入框*/
+form
+{
+	margin-top: 30px;
+}
+input
+{
+	width: 100px;
+	transition: width 0.7s;
+	-moz-transition: width 0.7s;
+	-webkit-transition: width 0.7s;
+	-o-transition: width 0.7s;
+}
+input:focus
+{
+	width: 200px;
+}
+/*banner*/
+.banner
+{
+	padding: 0;
+	width: 280px;
+	height: 200px;
+	position: relative;
+	overflow: hidden;
+}
+.banner-item
+{
+	width: 280px;
+	height: 200px;
+	list-style-type: none;
+	z-index: 1;
+	position: absolute;
+	left: 0;
+	top: 0;
+
+}
+@keyframes slideleft 
+{
+	0% {
+		transform: translateX(-100%);
+	}
+	100% {
+		transform: translateX(0%);
+	}
+}
+.banner-item:target 
+{
+	z-index: 2;
+	animation: slideleft .5s forwards;
+}
+#one
+{
+	left: 0;
+	background-color: #E98B2A;
+}
+#two
+{
+	background-color: #227D51;
+}
+#three
+{
+	background-color: #1C1C1C;
+}
+.contraller-item
+{
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	text-decoration: none;
+	line-height: 30px;
+	text-align: center;
+	color: #ccc;
+	background-color: rgba(255, 255, 255, .5);
+	margin: -4px;
+}
+.banner-contraller
+{
+	position: relative;
+	top: -46px;
+	right: -188px;
+	z-index: 2;
+}
