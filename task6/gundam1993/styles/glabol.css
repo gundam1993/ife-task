@@ -56,11 +56,17 @@ header>p
 {
 	width: 641px;
 	height: 301px;
-	background-image: url(img/img1.jpg);
 	position: relative;
 	overflow: auto;
 }
-
+#title-img img
+{
+	width: 641px;
+	height: 301px;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
 #main-img-left
 {
 	background-color: rgba(34,125,81,0.5);
@@ -280,8 +286,15 @@ header>p
 {
 	width: 458px;
 	height: 275px;
-	background-image: url(img/img3.jpg);
 	position: relative;
+}
+#pic img
+{
+	width: 458px;
+	height: 275px;
+	position: absolute;
+	top: 0;
+	left: 0;
 }
 #pic div
 {
