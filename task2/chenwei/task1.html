@@ -3,41 +3,112 @@
 <html>
 <head>
     <style type="text/css">
-        body{
+        body {
             background-color: #DEDEDE;
-            text-align: center;
+            margin: 0px;
         }
-        .contentContainer{
-            width:90%;
-            text-align: left;
-            background-color: white;
+
+        .contentContainer {
+            background-color: #DEDEDE;
             margin: 10px 0px;
+            padding: 20px;
         }
-        #topbar{
+        .contentContainer img{
+            display: block;
+        }
+
+        article {
+            background-color: white;
+            padding: 20px;
+            box-shadow: 2px 2px 2px #999;
+        }
+
+        #topbar,footer {
             background-color: #343434;
             height: 100px;
-
+            line-height: 100px;
         }
-        #logo{
+
+        #logo {
             height: 80px;
             float: left;
+            margin: 0 0 0 20px;
         }
-        #topbar li{
+
+        #topbar li {
             float: left;
+            margin: 0 10px;
         }
-        #topbar ul{
-            display: table-cell;
+
+        #topbar ul {
             float: right;
-            vertical-align: middle;
-            height: 100px;
+            margin: 0;
         }
-        #topbar a{
+
+        #topbar a {
             color: white;
             text-decoration: none;
         }
+
+        .grayFont {
+            color: #75787D;
+        }
+        .nonStyleLi{
+            list-style-type: none;
+        }
+        .imgArticle p{
+            border: solid 1px gray;
+            width: 300px;
+            padding: 10px;
+        }
+        table{
+            border-collapse: collapse;
+            border-color: gray;
+            border-spacing: 0;
+            width: 100%;
+        }
+        td{
+            padding: 5px;
+        }
+        thead{
+            background-color: black;
+            color: white;
+            text-align: left;
+        }
+        tfoot{
+            font-weight: bold;
+            background-color: gray;
+        }
+        #formTable{
+            border: none;
+        }
+        #formTable td.left{
+            text-align: right;
+        }
+        #formTable td.rigth{
+            text-align: left;
+         }
+        .sidebarTitle{
+            border-left: solid 4px gray;
+            padding-left: 5px;
+        }
+        #submitBtn{
+            background-color: #1a62e2;
+            border-radius: 15px;
+            color: white;
+            font-weight: bold;
+            height: 40px;
+            width: 100%;
+        }
+        footer{
+            text-align: center;
+            font-weight: bold;
+            font-size: larger;
+            color: white;;
+        }
     </style>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>任务1</title>
+    <title>任务2</title>
 </head>
 <body>
 <div id="topbar" class="topbar">
@@ -50,116 +121,231 @@
     </ul>
 </div>
 <div class="contentContainer">
-    <h2>文章一级标题</h2>
-    <h2>文章二级标题</h2>
-    <p>文章作者 文章发表时间</p>
-    <p>
-        这是一个很长很长的段落，真的很长很长。这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长
-        <br>换行了<br>这是一个很长很长的段落，真的很长很长。这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长,换行了
-        <br>
-        这是一个很长很长的段落，真的很长很长。这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长,
-        这是一个很长很长的段落，真的很长很长。<a href="http://ife.baidu.com">这里有一个链接链接到http://ife.baidu.com</a>这是一个很长很长的段落，<b>这里有个粗体字</b>真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长
-        <img src="img/pic.png" alt="图片"> <br>
-        这是一个很长很长的段落，真的很长很长。这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长
-        <br>换行了<br>这是一个很长很长的段落，真的很长很长。这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长,换行了
-        <br>
-        这是一个很长很长的段落，真的很长很长。这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长,
-        这是一个很长很长的段落，真的很长很长。<a href="http://ife.baidu.com">这里有一个链接链接到http://ife.baidu.com</a>这是一个很长很长的段落，<b>这里有个粗体字</b>真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长
-    </p></div>
-<div class="contentContainer"><h2>另一篇文章一级标题</h2>
-    <h2>文章二级标题</h2>
-    <p>文章作者 文章发表时间</p>
-    <p>
-        这是一个很长很长的段落，真的很长很长。这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长
-        <br>换行了<br>这是一个很长很长的段落，真的很长很长。这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长,换行了
-        <br>
-        这是一个很长很长的段落，真的很长很长。这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长,
-        这是一个很长很长的段落，真的很长很长。<a href="http://ife.baidu.com">这里有一个链接链接到http://ife.baidu.com</a>这是一个很长很长的段落，<b>这里有个粗体字</b>真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长
-        <img src="img/pic.png" alt="图片">
-    </p>
-    <ul>
-        <li>列表项目一</li>
-        <li>列表项目二</li>
-        <li>列表项目三</li>
-    </ul>
+    <article>
+        <h2>文章一级标题</h2>
+        <h3 class="grayFont">文章二级标题</h3>
+        <p class="grayFont">文章作者 文章发表时间</p>
+        <p>
+            这是一个很长很长的段落，真的很长很长。这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长
+            <br>换行了<br>这是一个很长很长的段落，真的很长很长。这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长,换行了
+            <br>
+            这是一个很长很长的段落，真的很长很长。这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长,
+            这是一个很长很长的段落，真的很长很长。
+            <a href="http://ife.baidu.com">这里有一个链接链接到http://ife.baidu.com</a>这是一个很长很长的段落，<b>这里有个粗体字</b>真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长
+            <img src="img/pic.png" alt="图片"> <br>
+            这是一个很长很长的段落，真的很长很长。这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长
+            <br>换行了<br>这是一个很长很长的段落，真的很长很长。这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长,换行了
+            <br>
+            <a href="http://ife.baidu.com" target="_blank">这里有一个链接新窗口打开到http://ife.baidu.com</a>
+            这是一个很长很长的段落，真的很长很长。这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长,
+            这是一个很长很长的段落，真的很长很长。<a
+                href="http://ife.baidu.com">这里有一个链接链接到http://ife.baidu.com</a>这是一个很长很长的段落，<b>这里有个粗体字</b>真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长
+        </p>
+    </article>
 </div>
-<div class="contentContainer"><h2>图片</h2>
-    <p>
-        好看的图片 <br>
-        <img src="img/pic.png" alt="图片">
-    </p>
-    <p>
-        好看的图片 <br>
-        <img src="img/pic.png" alt="图片">
-    </p>
-    <p>
-        好看的图片 <br>
-        <img src="img/pic.png" alt="图片">
-    </p>
-    <p>
-        好看的图片 <br>
-        <img src="img/pic.png" alt="图片">
-    </p>
-    <p>
-        好看的图片 <br>
-        <img src="img/pic.png" alt="图片">
-    </p>
-    <p>
-        好看的图片 <br>
-        <img src="img/pic.png" alt="图片">
-    </p>
-    <p>
-        好看的图片 <br>
-        <img src="img/pic.png" alt="图片">
-    </p>
-    <p>
-        好看的图片 <br>
-        <img src="img/pic.png" alt="图片">
-    </p>
-    <p>
-        好看的图片 <br>
-        <img src="img/pic.png" alt="图片">
-    </p>
-    <p>
-        好看的图片 <br>
-        <img src="img/pic.png" alt="图片">
-    </p>
-    <p>
-        好看的图片 <br>
-        <img src="img/pic.png" alt="图片">
-    </p></div>
+<div class="contentContainer">
+    <article><h2>另一篇文章一级标题</h2>
+        <h3 class="grayFont">文章二级标题</h3>
+        <p class="grayFont">文章作者 文章发表时间</p>
+        <p>
+            这是一个很长很长的段落，真的很长很长。这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长
+            <br>换行了<br>这是一个很长很长的段落，真的很长很长。这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长,换行了
+            <br>
+            这是一个很长很长的段落，真的很长很长。这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长,
+            这是一个很长很长的段落，真的很长很长。<a
+                href="http://ife.baidu.com">这里有一个链接链接到http://ife.baidu.com</a>这是一个很长很长的段落，<b>这里有个粗体字</b>真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长这是一个很长很长的段落，真的很长很长
+            <img src="img/pic.png" alt="图片">
+        </p>
+        <ul>
+            <li class="nonStyleLi">列表项目一</li>
+            <li class="nonStyleLi">列表项目二</li>
+            <li class="nonStyleLi">列表项目三</li>
+        </ul>
+    </article>
+</div>
+<div class="contentContainer">
+    <article class="imgArticle"><h2>图片</h2>
+        <p>
+            好看的图片 <br>
+            <img src="img/pic.png" alt="图片">
+        </p>
+        <p>
+            好看的图片 <br>
+            <img src="img/pic.png" alt="图片">
+        </p>
+        <p>
+            好看的图片 <br>
+            <img src="img/pic.png" alt="图片">
+        </p>
+        <p>
+            好看的图片 <br>
+            <img src="img/pic.png" alt="图片">
+        </p>
+        <p>
+            好看的图片 <br>
+            <img src="img/pic.png" alt="图片">
+        </p>
+        <p>
+            好看的图片 <br>
+            <img src="img/pic.png" alt="图片">
+        </p>
+        <p>
+            好看的图片 <br>
+            <img src="img/pic.png" alt="图片">
+        </p>
+        <p>
+            好看的图片 <br>
+            <img src="img/pic.png" alt="图片">
+        </p>
+        <p>
+            好看的图片 <br>
+            <img src="img/pic.png" alt="图片">
+        </p>
+        <p>
+            好看的图片 <br>
+            <img src="img/pic.png" alt="图片">
+        </p>
+        <p>
+            好看的图片 <br>
+            <img src="img/pic.png" alt="图片">
+        </p></article>
+</div>
+
+<div class="contentContainer">
+    <article>
+        <h2>最后一篇文章一级标题</h2>
+        <h3 class="grayFont">文章二级标题</h3>
+        <p class="grayFont">文章作者 文章发表时间</p>
+        <ol>
+            <li>排名1</li>
+            <li>排名2</li>
+            <li>排名3</li>
+        </ol>
+
+        <p>
+            下面是一个表格，给表格增加一个border="1"好让你看出这是一个表格
+        <table border="1">
+            <thead>
+            <tr>
+                <th>表头</th>
+                <th>表头</th>
+                <th>表头</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>表内容单元格</td>
+                <td>表内容单元格</td>
+                <td><a href="">操作</a></td>
+            </tr>
+            <tr>
+                <td>表内容单元格</td>
+                <td>表内容单元格</td>
+                <td><a href="">操作</a></td>
+            </tr>
+            <tr>
+                <td>表内容单元格</td>
+                <td>表内容单元格</td>
+                <td><a href="">操作</a></td>
+            </tr>
+            <tr>
+                <td>表内容单元格</td>
+                <td>表内容单元格</td>
+                <td><a href="">操作</a></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td>总计</td>
+                <td colspan="2">1000</td>
+            </tr>
+            </tfoot>
+        </table>
+        </p>
+    </article>
+</div>
 
 
 <div class="contentContainer">
-    <h2>这里以后是个侧栏，这是侧栏的标题</h2>
-    <h2>侧栏注册窗口标题</h2>
-    <p>请输入邮箱地址：<input type="text" placeholder="这是一个文本输入框"></p>
-    <p>邮箱地址请按要求格式输入</p>
-    <p>
-        请输入密码：<input type="password" placeholder="这是一个文本输入框">
-        请重复输入密码：<input type="password" placeholder="这是一个文本输入框">
-        <br>
-        密码请为6-16位英文数字
-    </p>
-    <p>
-        性别：
-        <input type="radio" checked="checked" name="Sex" value="male">男
-        <input type="radio" name="Sex" value="female">女
-        城市：
-        <select name="city">
-            <option value="bj">北京</option>
-            <option value="sh">上海</option>
-            <option value="gz">广州</option>
-            <option value="sz">深圳</option>
-        </select>
-        爱好：
-        <input type="checkbox" name="sport">运动
-        <input type="checkbox" name="art">艺术
-        <input type="checkbox" name="science">科学
-        个人描述：
-        <textarea name="personDesc" id="personDesc" cols="30" rows="2" placeholder="这是一个多行输入框，请输入您的个人描述"></textarea>
-    </p>
+    <article>
+        <form>
+            <h2 class="sidebarTitle">这里以后是个侧栏，这是侧栏的标题</h2>
+            <table id="formTable">
+                <tr>
+                    <td class="left"><label for="">请输入邮箱地址</label>
+                    <td class="rigth"><input type="text" placeholder="这是一个文本输入框"></td>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="left"><label for=""></label>
+                    <td class="rigth">邮件地址请按要求格式输入</td>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="left"><label for="">请输入密码</label>
+                    <td class="rigth"><input type="password" placeholder="这是一个文本输入框" value="123456"></td>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="left"><label for="">请重复输入密码</label>
+                    <td class="rigth"><input type="password" placeholder="这是一个文本输入框" value="123456"></td>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="left"><label for=""></label>
+                    <td class="rigth">密码请为6-16位英文数字</td>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="left"><label for="">性别</label>
+                    <td class="rigth">
+                        <input type="radio" checked="checked" name="Sex" value="male" class="blueRd"><label>男</label>
+                        <input type="radio" name="Sex" value="female" class="blueRd"><label>女</label>
+                    </td>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="left"><label for="">城市</label>
+                    <td class="rigth">
+                        <select name="city">
+                            <option value="bj">北京</option>
+                            <option value="sh">上海</option>
+                            <option value="gz">广州</option>
+                            <option value="sz">深圳</option>
+                        </select>
+                    </td>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="left"><label for="">爱好</label>
+                    <td class="rigth">
+                        <input type="checkbox" name="sport">运动
+                        <input type="checkbox" name="art">艺术
+                        <input type="checkbox" name="science">科学
+                    </td>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="left"><label for="">个人描述</label>
+                    <td class="rigth">
+                        <textarea name="personDesc" id="personDesc" cols="30" rows="2"
+                                  placeholder="这是一个多行输入框，请输入您的个人描述"></textarea>
+                    </td>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="提交确认" id="submitBtn"/>
+                    </td>
+                </tr>
+            </table>
+
+
+        </form>
+    </article>
 </div>
-<div>版权属chenwei所有©</div>
+<footer>
+    版权属chenwei所有©
+</footer>
 </body>
 </html>
