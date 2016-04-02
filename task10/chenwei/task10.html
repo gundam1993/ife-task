@@ -4,8 +4,50 @@
 <head>
     <title>任务10</title>
     <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <style type="text/css">
+        #flexWrap{
+            display: flex;
+            margin: 0;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #flexWrap>div{
+            width: 150px;
+            padding: 20px;
+            border:1px solid #ff0000;
+            margin-bottom:20px;
+        }
+        #div4{
+            border-color: #00f !important;
+            height: 200px;
+        }
+        #div1{
+            height: 120px;
+        }
+        #div2{
+            height: 100px;
+        }
+        #div3{
+            height: 40px;
+        }
+        @media screen and (max-width: 640px){
+            #div4{
+                order: -1;
+            }
+            body{
+                align-items: flex-start;
+            }
+        }
+    </style>
 </head>
 <body>
+<div id="flexWrap">
+    <div id="div1"></div>
+    <div id="div2"></div>
+    <div id="div3"></div>
+    <div id="div4"></div>
+</div>
 
 </body>
 </html>
