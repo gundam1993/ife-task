@@ -84,7 +84,11 @@ function addBtnHandle() {
  */
 function delBtnHandle() {
   // do sth.
-  var delBtn = window.event.target;
+  if (window.event) {
+    var delBtn = window.event.target;
+  }else{
+    var delBtn = window.srcElement.target;
+  }
   var aqikey = delBtn.parentElement.parentElement.firstChild.innerHTML
   delete aqiData[aqikey];
   renderAqiList();
