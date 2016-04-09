@@ -1,0 +1,48 @@
+input
+{
+	width: 400px;
+	margin-left: 10px;
+}
+button
+{
+	width: 80px;
+	height: 30px;
+	background-color: #F75C2F;
+	color: #FFF;
+	border: 1px solid #F75C2F;
+	margin: 10px;
+	cursor: pointer;
+	transition: color,background-color 0.3s ease-in-out;
+}
+button:hover
+{
+	background-color: #FFF;
+	color: #F75C2F;
+	border-radius: 3px;
+}
+#displayArea
+{
+	width: 100%;
+	overflow: auto;
+}
+#displayArea>div
+{
+	height: 40px;
+	width: 40px;
+	background-color: #3A8FB7;
+	color: #FFF;
+	float: left;
+	margin: 10px;
+	text-align: center;
+	line-height: 40px;
+	vertical-align: middle;
+	border-radius: 25px;
+	border: 1px solid #3A8FB7;
+	cursor: pointer;
+	transition: color,background-color 0.3s ease-in-out;
+}
+#displayArea>div:hover
+{
+	background-color: #FFF;
+	color: #3A8FB7;
+}
