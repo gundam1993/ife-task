@@ -1,0 +1,31 @@
+#aqi-chart-wrap
+{
+	width: 1280px;
+	height: 700px;
+	border: 1px solid black;
+	background-color: white;
+	margin: 20px auto 0 auto;
+	overflow: hidden;
+	position: relative;
+	text-align: center;
+}
+@keyframes showStrip {
+	0% {
+		bottom: -500px;
+	}
+	100% {
+		bottom: 0px;
+	}
+}
+#aqi-chart-wrap>div
+{
+	position: absolute;
+	bottom: 0;
+	cursor: pointer;
+	animation: showStrip 0.5s ease-in-out;
+}
+#aqi-chart-wrap>p
+{
+	font-size: 20px;
+	display: inline-block;
+}
