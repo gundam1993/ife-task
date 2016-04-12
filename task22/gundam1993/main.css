@@ -1,0 +1,56 @@
+button
+{
+	width: 70px;
+	height: 30px;
+	background-color: #F75C2F;
+	color: #FFF;
+	border: 1px solid #F75C2F;
+	margin: auto;
+	margin-top: 20px;
+	cursor: pointer;
+	transition: color,background-color 0.3s ease-in-out;
+	display: inline-block;
+	outline: none;
+}
+#preOrder
+{
+	margin-left: 44%;
+}
+button:hover
+{
+	background-color: #FFF;
+	color: #F75C2F;
+	border-radius: 3px;
+}
+div
+{
+	border: 2px solid #000;
+	margin: auto;
+	display: flex;
+	background-color: #FFF
+}
+#root
+{
+	width: 1000px;
+	height: 300px;
+	margin-top: 100px;
+	z-index: 1;
+}
+.child1
+{
+	width: 471px;
+	height: 266px;
+	z-index: 2;
+}
+.child2
+{
+	width: 213px;
+	height: 236px;
+	z-index: 3;
+}
+.child3
+{
+	width: 84px;
+	height: 206px;
+	z-index: 4;
+}
