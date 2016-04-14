@@ -1,0 +1,69 @@
+button
+{
+	width: 70px;
+	height: 30px;
+	background-color: #F75C2F;
+	color: #FFF;
+	border: 1px solid #F75C2F;
+	margin: auto;
+	margin-top: 20px;
+	cursor: pointer;
+	transition: color,background-color 0.3s ease-in-out;
+	display: inline-block;
+	outline: none;
+}
+#deep
+{
+	margin-left: 41%;
+}
+button:hover
+{
+	background-color: #FFF;
+	color: #F75C2F;
+	border-radius: 3px;
+}
+div
+{
+	border: 2px solid #000;
+	font-size: 10px;
+	align-items: center;
+	justify-content: space-around;
+	margin: auto;
+	display: flex;
+	background-color: #FFF
+}
+#root
+{
+	flex-grow: 84;
+	width: 1200px;
+	height: 200px;
+	margin-top: 100px;
+	z-index: 1;
+}
+#root div
+{
+	margin: 10px;
+}
+.child1
+{
+	flex-grow: 28;
+	height: 166px;
+	z-index: 2;
+}
+.child2
+{
+	flex-grow: 8;
+	height: 136px;
+	z-index: 3;
+}
+.child3
+{
+	flex-grow: 2;
+	height: 106px;
+	z-index: 4;
+}
+.child4{
+	flex-grow: 1;
+	height: 86px;
+	z-index: 5;
+}
