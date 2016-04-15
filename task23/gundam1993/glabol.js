@@ -59,12 +59,12 @@ TreeWalker.prototype.animate = function(search) {
 			stack[0].style.backgroundColor = '#3A8FB7';
 		};
 		ani = setInterval(function () {
-			if (i == stack.length - 1 && search === '') {
+			if (i == stack.length - 1 && search !== 'search') {
 				stack[i].style.backgroundColor = '#fff';
 				self.isWalking = false;
 				clearInterval(ani);
 				self.stack = [];
-			}else if (i == stack.length - 1 && search) {
+			}else if (i == stack.length - 1 && search === 'search') {
 				stack[i].style.backgroundColor = '#3A8FB7';
 				stack[i - 1].style.backgroundColor = '#FFF';
 				self.isWalking = false;
