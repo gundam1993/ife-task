@@ -1,0 +1,58 @@
+html,body
+{
+	height: 100%;
+	width: 100%;
+	position: relative;
+}
+#mainblock
+{
+	position: absolute;
+	top: 35%;
+	left: 35%;
+}
+span
+{
+	font-size: 30px;
+	line-height: 36px;
+	vertical-align: middle;
+	display: inline-block;
+}
+input
+{
+	height: 30px;
+	width: 200px;
+	font-size: 28px;
+	line-height: 30px;
+	vertical-align: middle;
+	outline: none;
+	border-radius: 5px;
+	box-shadow: none;
+}
+button
+{
+	width: 80px;
+	height: 36px;
+	font-size: 17px;
+	margin-left: 10px;
+	background-color: #005CAF;
+	color: #FFF;
+	border: 1px solid #005CAF;
+	cursor: pointer;
+	transition: color,background-color 0.3s ease-in-out;
+	outline: none; 
+}
+button:hover
+{
+	background-color: #FFF;
+	color: #005CAF;
+	border-radius: 3px;
+}
+p
+{
+	display: block;
+	color: #999;
+	font-size: 20px;
+	line-height: 20px;
+	vertical-align: middle;
+	margin-top: 10px;
+}
