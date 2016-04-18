@@ -1,0 +1,77 @@
+html,body
+{
+	height: 100%;
+	width: 100%;
+	display: flex;
+	background-color: #0F2540;
+	align-items: center;
+	justify-content: center;
+}
+#mainblock
+{
+	
+	border-radius: 30px;
+	padding: 40px;
+	padding-right: 60px;
+	background-color: white;
+	border-radius: 20px;
+	text-align: right;
+}
+#mainblock p
+{
+	text-align: left;
+	display: block;
+	color: #999;
+	font-size: 15px;
+	height: 20px;
+	line-height: 20px;
+	vertical-align: middle;
+	margin: 10px 0 10px 100px;
+	cursor: default;
+}
+span
+{
+	font-size: 20px;
+	line-height: 26px;
+	vertical-align: middle;
+	display: inline-block;
+	text-align: right;
+}
+input
+{
+	height: 20px;
+	width: 200px;
+	font-size: 18px;
+	line-height: 20px;
+	vertical-align: middle;
+	outline: none;
+	border-radius: 5px;
+	box-shadow: none;
+}
+input.right
+{
+	border: 2px solid green;
+}
+input.wrong
+{
+	border: 2px solid red;
+}
+#check
+{
+	width: 100px;
+	height: 36px;
+	font-size: 10px;
+	margin-top: 20px;
+	background-color: #005CAF;
+	color: #FFF;
+	border: 1px solid #005CAF;
+	cursor: pointer;
+	transition: color,background-color 0.3s ease-in-out;
+	outline: none; 
+}
+#check:hover
+{
+	background-color: #FFF;
+	color: #005CAF;
+	border-radius: 3px;
+}
