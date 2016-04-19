@@ -1,0 +1,62 @@
+html,body
+{
+	height: 100%;
+	width: 100%;
+	display: flex;
+	background-color: #0F2540;
+	align-items: center;
+	justify-content: center;
+}
+#mainblock
+{
+	width: 400px;
+	border-radius: 30px;
+	padding: 40px 20px;
+	background-color: white;
+	text-align: center;
+}
+span
+{
+	font-size: 20px;
+	line-height: 26px;
+	vertical-align: middle;
+	display: inline-block;
+	text-align: right;
+}
+input
+{
+	height: 20px;
+	width: 250px;
+	font-size: 18px;
+	line-height: 20px;
+	vertical-align: middle;
+	outline: none;
+	border-radius: 5px;
+	box-shadow: none;
+}
+input[type='radio']
+{
+	width: auto;
+	margin: 0 7px 7px 40px;
+}
+#studentBlock,#notStudentBlock
+{
+	margin: 10px 0;
+}
+select
+{
+	width: 80px;
+	height: 26px;
+	border-radius: 5px;
+	outline: none;
+	font-size: 15px;
+	line-height: 26px;
+}
+#schoolSelect
+{
+	width: 200px;
+}
+.hide
+{
+	display: none;
+}
