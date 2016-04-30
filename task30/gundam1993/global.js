@@ -25,14 +25,17 @@ function showhint() {//input获得焦点时提示
  		hint.innerHTML = '名称不能为空！';
  		hint.style.color = 'red';
  		input.style.border = '2px solid red';
+ 		input.className = '';
  	}else if (len >= 4 && len <= 16) {
  		hint.innerHTML = '格式正确!';
  		hint.style.color = 'green';
  		input.style.border = '2px solid green';
+ 		input.className = 'pass';
  	}else{
  		hint.innerHTML = '长度需为4~16字符!';
  		hint.style.color = 'red';
  		input.style.border = '2px solid red';
+ 		input.className = '';
  	}
  }
 
@@ -57,10 +60,12 @@ function showhint() {//input获得焦点时提示
  		hint.innerHTML = '格式正确!';
  		hint.style.color = 'green';
  		$('#pwdInput').style.border = '2px solid green';
+ 		$('#pwdInput').className = 'pass';
  	}else{
  		hint.innerHTML = '请输入6到16位数字和字母!';
  		hint.style.color = 'red';
  		$('#pwdInput').style.border = '2px solid red';
+ 		$('#pwdInput').className = '';
  	}
 
  }
@@ -73,10 +78,12 @@ function showhint() {//input获得焦点时提示
  		hint.innerHTML = '格式正确!';
  		hint.style.color = 'green';
  		$('#rePwdInput').style.border = '2px solid green';
+ 		$('#rePwdInput').className = 'pass';
  	}else{
  		hint.innerHTML = '请再次输入密码';
  		hint.style.color = 'red';
  		$('#rePwdInput').style.border = '2px solid red';
+ 		$('#rePwdInput').className = '';
  	}
  }
 
@@ -88,10 +95,12 @@ function showhint() {//input获得焦点时提示
  		hint.innerHTML = '格式正确!';
  		hint.style.color = 'green';
  		$('#mailInput').style.border = '2px solid green';
+ 		$('#mailInput').className = 'pass';
  	}else{
  		hint.innerHTML = '请输入正确的邮箱地址';
  		hint.style.color = 'red';
  		$('#mailInput').style.border = '2px solid red';
+ 		$('#mailInput').className = '';
  	}
  }
 
@@ -103,10 +112,12 @@ function showhint() {//input获得焦点时提示
  		hint.innerHTML = '格式正确!';
  		hint.style.color = 'green';
  		$('#phoneInput').style.border = '2px solid green';
+ 		$('#phoneInput').className = 'pass';
  	}else{
  		hint.innerHTML = '请输入正确的手机号码';
  		hint.style.color = 'red';
  		$('#phoneInput').style.border = '2px solid red';
+ 		$('#phoneInput').className = '';
  	}
  }
 
@@ -115,6 +126,7 @@ function showhint() {//input获得焦点时提示
  	 rePwdInput = $('#rePwdInput'),
  	 mailInput = $('#mailInput'),
  	 phoneInput = $('#phoneInput');
+ 	 check = $("#check");
  nameInput.onblur = function () {
  	checkName();
  }
@@ -132,4 +144,13 @@ function showhint() {//input获得焦点时提示
  }
  window.onload = function () {
  	showhint();
+ }
+ check.onclick = function () {
+ 	var pass = $$('.pass');
+ 	if (pass.length == 5) {
+ 		alert('提交成功');
+ 	}else{
+ 		alert('请输入正确的数据');
+ 		return false;
+ 	}
  }
