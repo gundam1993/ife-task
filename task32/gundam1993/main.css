@@ -1,0 +1,184 @@
+html,body
+{
+	background-color: #0F2540;
+	height:95%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#controlBlock
+{
+	width: 15%;
+	min-width: 285px;
+	min-height: 720px;
+	border-radius: 15px;
+	padding: 40px 20px;
+	background-color: white;
+	overflow: hidden;
+	margin: 5px;
+}
+#showblock
+{
+	width: 79%;
+	min-height: 720px;
+	min-width: 720px;
+	border-radius: 15px;
+	padding: 40px 20px;
+	background-color: white;
+	text-align: center;
+	margin: 5px;
+}
+fieldset
+{
+	font-size: 17px;
+	width: 245px;
+	margin: 10px auto;
+}
+span
+{
+	font-size: 15px;
+	line-height: 26px;
+	vertical-align: middle;
+	display: inline-block;
+	text-align: right;
+}
+
+#controlBlock input
+{
+	height: 20px;
+	width: 180px;
+	font-size: 18px;
+	line-height: 20px;
+	vertical-align: middle;
+	outline: none;
+	border-radius: 5px;
+	box-shadow: none;
+	margin: 5px 0;
+}
+#length input
+{
+	width: 40px;
+}
+#option input
+{
+	width: 240px;
+	font-size: 15px;
+}
+#controlBlock input[type='radio']
+{
+	width: auto;
+	margin: 0 7px 7px 30px;
+	font-size: 15px;
+}
+.hide
+{
+	display: none;
+}
+button
+{
+	width: 100%;
+	height: 30px;
+	background-color: #F75C2F;
+	color: #FFF;
+	border: 1px solid #F75C2F;
+	margin: auto;
+	margin-top: 30px;
+	cursor: pointer;
+	transition: color,background-color 0.3s ease-in-out;
+	display: inline-block;
+	outline: none;
+}
+#result button
+{
+	width: 20%;
+}
+button:hover
+{
+	background-color: #FFF;
+	color: #F75C2F;
+	border-radius: 3px;
+}
+
+#opDisplay
+{
+	width: 100%;
+	overflow: auto;
+}
+#opDisplay>div
+{
+	height: 36px;
+	min-width: 30px;
+	background-color: #3A8FB7;
+	color: #FFF;
+	float: left;
+	margin: 10px;
+	padding: 0 3px;
+	text-align: center;
+	line-height: 36px;
+	vertical-align: middle;
+	border-radius: 7px;
+	border: 3px solid #3A8FB7;
+	cursor: pointer;
+	transition: color,background-color 0.3s ease-in-out;
+}
+#opDisplay>div:hover
+{
+	background-color: #FFF;
+	color: #3A8FB7;
+}
+#result
+{
+	width: 720px;
+	margin: auto;
+	outline: none;
+	align-items: center;
+	font-size: 17px;
+}
+#result span
+{
+	font-size: 20px;
+	line-height: 26px;
+	vertical-align: middle;
+	display: inline-block;
+	text-align: right;
+	width: 200px;
+	margin-left: -100px;
+}
+#result div
+{
+	margin: 15px auto;
+	text-align: left;
+}
+#result input[type='text'],input[type='password']
+{
+	width: 300px;
+	height: 20px;
+	line-height: 20px;
+	vertical-align: middle;
+	outline: none;
+	border-radius: 5px;
+	box-shadow: none;
+}
+#result textarea
+{
+	width: 300px;
+	height: 80px;
+	resize: none;
+	outline: none;
+	border-radius: 5px;
+	box-shadow: none;
+	vertical-align: top;
+}
+#result p
+{
+	text-align: left;
+	display: block;
+	color: #999;
+	font-size: 15px;
+	height: 20px;
+	line-height: 20px;
+	vertical-align: middle;
+	margin: 10px 0 10px 100px;
+	cursor: default;
+}

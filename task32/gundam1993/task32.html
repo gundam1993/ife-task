@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TASK32</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+	<aside id="controlBlock">
+		<fieldset id="typeSelect">
+			<legend>类型</legend>
+			<input type="radio" id="typeInput" name="inputType" value="input" checked="checked">
+			<label for="typeInput">输入框</label>
+			<input type="radio" id="typeCheckBox" name="inputType" value="checkbox">
+			<label for="typeCheckBox">多选框</label>
+			<input type="radio" id="typeRaido" name="inputType"value="radio">
+			<label for="typeRaido">单选框</label>
+			<input type="radio" id="typeSelecter" name="inputType" value="select">
+			<label for="typeSelecter">下拉框</label>
+			<input type="radio" id="typeTextarea" name="inputType" value="textarea">
+			<label for="typeTextarea">文本域</label>
+		</fieldset>
+		<fieldset id="set">
+			<legend>配置</legend>
+			<span>名称：</span>
+			<input type="text" id="name" value="输入框"></input>
+			<input type="radio" id="must" name="nessary" value="must" checked="checked">
+			<label for="must">必填</label>
+			<input type="radio" id="notMust" name="nessary" value="notMust">
+			<label for="notMust">选填</label>
+		</fieldset>
+		<fieldset id="rule">
+			<legend>规则</legend>
+			<input type="radio" id="str" name="ruleType" value="str" checked="checked">
+			<label for="str">文字</label><br>
+			<input type="radio" id="num" name="ruleType" value="num">
+			<label for="num">数字</label><br>
+			<input type="radio" id="mail" name="ruleType"value="mail">
+			<label for="mail">邮箱</label><br>
+			<input type="radio" id="pho" name="ruleType" value="pho">
+			<label for="pho">手机号码</label><br>
+			<input type="radio" id="pwd" name="ruleType" value="pwd">
+			<label for="pwd">密码</label>
+		</fieldset>
+		<fieldset id="length">
+			<legend>长度限制</legend>
+			<span>字符范围：</span>
+			<input type="text" id="minLen" value="4"></input>
+			<span>——</span>
+			<input type="text" id="maxLen" value="16"></input>
+		</fieldset>
+		<fieldset id="option" class="hide">
+			<legend>选项</legend>
+			<input type="text" id="opInput" placeholder="可用空格，逗号，回车来分隔选项"></input>
+			<div id="opDisplay"></div>
+		</fieldset>
+		<button id="add">添加</button>
+	</aside>
+	<div id="showblock">
+		<form id="result">
+			
+		</form>
+	</div>
+	<script type="text/javascript" src="scripts/UIControlModule.js"></script>
+	<script type="text/javascript" src="scripts/showTagModule.js"></script>
+	<script type="text/javascript" src="scripts/formBuildModule.js"></script>
+	<script type="text/javascript" src="scripts/app.js"></script>
+	<script type="text/javascript" src="scripts/checkAndHintModule.js"></script>
+</body>
+</html>
