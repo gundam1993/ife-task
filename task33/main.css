@@ -19,6 +19,12 @@ html,body
 	align-items: center;
 	margin: 20px;
 }
+table
+{
+	float: left;
+	display: block;
+	z-index: 1;
+}
 tbody
 {
 	border-collapse: collapse;
@@ -35,7 +41,7 @@ td
 	width: 60px;
 	height: 60px;
 	margin: 0;
-	border: 1px solid #000;
+	border: 1px solid #999;
 	font-size: 30px;
 	font-weight: bold;
 	padding: 0;
@@ -48,6 +54,32 @@ td
 {
 	border: 0;
 }
+.chessboard-top
+{
+	border-top: 2px solid #000;
+}
+.chessboard-right
+{
+	border-right: 2px solid #000;
+}
+.chessboard-bottom
+{
+	border-bottom: 2px solid #000;
+}
+.chessboard-left
+{
+	border-left: 2px solid #000;
+}
+
+#moveArea
+{
+	width: 673px;
+	height: 673px;
+	z-index: 2;
+	position: relative;
+}
+
+
 #controlArea
 {
 	width: 20%;
@@ -118,20 +150,7 @@ div#target
 	height: 60px;
 	background-color: #A5DEE4;
 	box-sizing: border-box;
-}
-.top
-{
+	position: absolute;
 	border-top: 20px solid #00896C;
-}
-.right
-{
-	border-right: 20px solid #00896C;
-}
-.bottom
-{
-	border-bottom: 20px solid #00896C;
-}
-.left
-{
-	border-left: 20px solid #00896C;
+	transition: all 1s;
 }
