@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TASK36</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+	<section id="chessboardArea">
+		<table id="map">
+			<tbody id="map-block">
+				
+			</tbody>
+		</table>
+		<div id="moveArea">
+			
+		</div>		
+	</section>
+	<section id="controlArea">
+		<div id="commander-area">
+			<div id="commander-lines-wrapper">
+				<div id="commander-lines">
+					<div class="commander-block">1</div>
+				</div>
+			</div>
+			<textarea type="text" value="GO" id="order"></textarea>
+		</div>
+		<button id="run">Run</button>
+		<button id="refresh">Refresh</button>
+		<button id="buildwall">Build</button>
+		<span></span>
+		<select id="boxnum">
+			<option value="20">20*20</option>
+			<option value="30">30*30</option>
+		</select>
+		<div id="hint"></div>
+	</section>
+	<section>
+		<div id="explain">
+			<span>前进： GO</span>
+			<span>向右转： TUN RIG</span>
+			<span>向左转： TUN LEF</span>
+			<span>向后转： TUN BAC</span>
+			<span>向左平移： TRA LEF</span>
+			<span>向右平移： TRA RIG</span>
+			<span>向上平移： TRA TOP</span>
+			<span>向下平移： TRA BOT</span>
+			<span>向左移动： MOV LEF</span>
+			<span>向右移动： MOV RIG</span>
+			<span>向上移动： MOV TOP</span>
+			<span>向下移动： MOV BOT</span>
+		</div>
+	</section>
+	<script type="text/javascript" src="scripts/roboBuildModule.js"></script>
+	<script type="text/javascript" src="scripts/orderCheckModule.js"></script>
+	<script type="text/javascript" src="scripts/mapBuild.js"></script>
+	<script type="text/javascript" src="scripts/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+html,body
+{
+	background-color: #7ca9e0;
+	height:95%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+}
+#chessboardArea
+{
+	min-height: 720px;
+	min-width: 720px;
+	padding: 20px;
+	background-color: white;
+	text-align: center;
+	align-items: center;
+	margin: 20px;
+}
+table
+{
+	float: left;
+	display: block;
+	z-index: 1;
+	margin-right: 10px;
+}
+#map-block
+{
+	border-collapse: collapse;
+	display: block;
+	margin: auto;
+}
+tr
+{
+	margin: auto;
+
+}
+td
+{
+	margin: 0;
+	border: 1px solid #999;
+	font-size: 15px;
+	padding: 0;
+	box-sizing: border-box;
+}
+#Xaxis td
+{
+	border: 0;
+}
+.Yaxis
+{
+	border: 0;
+}
+#moveArea
+{
+	z-index: 2;
+	position: relative;
+}
+
+
+#controlArea
+{
+	width: 20%;
+	min-width: 200px;
+	padding: 0 20px;
+	text-align: center;
+	margin: 20px;
+}
+button
+{
+	width: 30%;
+	height: 30px;
+	font-size: 15px;
+	background-color: #F75C2F;
+	color: #FFF;
+	border: 1px solid #F75C2F;
+	margin: auto;
+	margin-top: 10px;
+	cursor: pointer;
+	transition: color,background-color 0.3s ease-in-out;
+	display: inline-block;
+	outline: none;
+}
+button:hover
+{
+	background-color: #FFF;
+	color: #F75C2F;
+	border-radius: 3px;
+}
+#boxnum
+{
+	width: 30%;
+	height: 30px;
+	margin-top: 10px;
+}
+#commander-area
+{
+	overflow: hidden;
+	height: 760px;
+}
+#order
+{
+	height: 100%;
+	width: 330px;
+	background-color: #193e6c;
+	font-size: 18px;
+	font-family: Menlo, Consolas, monospace;
+	color: #86C166;
+	line-height: 20px;
+	vertical-align: middle;
+	outline: none;
+	resize: none;
+	float: left;
+	border: none;
+	box-sizing: border-box;
+}
+#commander-lines-wrapper
+{
+	height: 100%;
+	width: 40px;
+	background-color: #0f2540;
+	float: left;
+}
+#commander-lines
+{
+	width: 40px;
+	position: relative;
+}
+.commander-block
+{
+	width: 35px;
+	height: 20px;
+	padding-right: 5px;
+	text-align: right;
+	font-size: 18px;
+	font-family: Menlo, Consolas, monospace;
+	color: #7ca9e0;
+}
+div#hint
+{
+	width: 100%;
+	height: 25px;
+	font-size: 20px;
+	text-align: center;
+}
+div#explain
+{
+	margin: 20px 30px;
+	text-align: left;
+}
+div#explain>span
+{
+	display: block;
+}
+
+
+div#target
+{
+	background-color: #A5DEE4;
+	box-sizing: border-box;
+	position: absolute;
+	transition: all 1s;
+	-ms-transition: all 1s;
+	-webkit-transition: all 1s;
+	-o-transition: all 1s;
+	-moz-transition: all 1s;
+}
