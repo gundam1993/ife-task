@@ -40,7 +40,7 @@ OrderList.prototype.runOrders = function () {
 	var x = setInterval(function () {
 			that.runlist(order[i]);
 			i++;
-			if (i > order.length || that.error == true) {
+			if (i == order.length || that.error == true) {
 				clearInterval(x);
 			}
 		},1000);
@@ -112,9 +112,9 @@ OrderList.prototype.runlist = function(order) {
 	}else{
 		hint.style.color = 'red';
 		hint.innerHTML = 'Error';
-		this.error = true;
 		this.lines = this.orders.indexOf(order);
 		this.errorHint();
+		this.error = true;
 	}
 };
 

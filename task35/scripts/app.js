@@ -16,7 +16,7 @@ window.onclick =function () {
 	{
 		case run :
 			orderList.getOrders();
-            orderList.runOrders();
+            orderList.runOrders(orderList);
 			break;
 		case refresh :
 			$('#order').value = '';
