@@ -1,31 +1,36 @@
  $ = function (el) { return document.querySelector(el); };
  $$ = function (el) { return document.querySelectorAll(el); };
 
-var chessboardWalker = new ChessboardWalker(),
-    orderList = new OrderList(),
-	run = $('#run'),
-	refresh = $('#refresh');
+function Application() {
+	this.chessboardWalker = new ChessboardWalker();
+	this.orderList = new OrderList();
 
-window.onload = function () {
-	chessboardWalker.show();
-}
+	this.$run = $('#run');
+	this.$refresh = $('#refresh');
+	this.$target = $("#target");
+	this.$order = $('#order');
 
-window.onclick =function () {
-	var target = $("#target");
-	switch (event.target)
-	{
-		case run :
-			orderList.getOrders();
-            orderList.runOrders(orderList);
-			break;
-		case refresh :
-			$('#order').value = '';
-            orderList.orders = [];
-			break;
-	}
+	this.init();
 }
+/*
+ *初始化，绑定所有事件
+ */
+Application.prototype.init = function() {
+	this.chessboardWalker.show();
+	this.$order.addEventListener('input',function () {
+		application.orderList.commblock();
+	})
+	this.$order.addEventListener('scroll',function () {
+		application.orderList.scroll();
+	})
+	this.$run.addEventListener('click',function () {
+		application.orderList.getOrders();
+        application.orderList.runOrders();
+	})
+	this.$refresh.addEventListener('click',function () {
+		$('#order').value = '';
+        application.orderList.orders = [];
+	})
+};
 
-$('#order').oninput = function () {
-	orderList.commblock();
-	$('#commander-lines').style.top = -event.target.scrollTop + 'px';
-}
+var application = new Application();

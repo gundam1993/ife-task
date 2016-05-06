@@ -62,52 +62,52 @@ OrderList.prototype.runlist = function(order) {
 	var	hint = $('#hint');
 		hint.style.color = 'green';
 	if (order == 'go') {
-		chessboardWalker.go(target);
+		application.chessboardWalker.go(target);
 		hint.innerHTML = 'Moved';
 	}else if (order == 'tun lef') {
-		chessboardWalker.turn('left',target);
+		application.chessboardWalker.turn('left',target);
 		hint.innerHTML = 'Turned';
 	}else if (order == 'tun rig') {
-		chessboardWalker.turn('right',target);
+		application.chessboardWalker.turn('right',target);
 		hint.innerHTML = 'Turned';
 	}else if (order == 'tun bac') {
-		chessboardWalker.turn('back',target);
+		application.chessboardWalker.turn('back',target);
 		hint.innerHTML = 'Turned';
 	}else if (order == 'tra lef') {
-		chessboardWalker.translation('lef',target);
+		application.chessboardWalker.translation('lef',target);
 		hint.innerHTML = 'Moved';
 	}else if (order == 'tra rig') {
-		chessboardWalker.translation('rig',target);
+		application.chessboardWalker.translation('rig',target);
 		hint.innerHTML = 'Moved';
 	}else if (order == 'tra top') {
-		chessboardWalker.translation('top',target);
+		application.chessboardWalker.translation('top',target);
 		hint.innerHTML = 'Moved';
 	}else if (order == 'tra bot') {
-		chessboardWalker.translation('bot',target);
+		application.chessboardWalker.translation('bot',target);
 		hint.innerHTML = 'Moved';
 	}else if (order == 'mov lef') {
-		chessboardWalker.position = 0;
-		chessboardWalker.direction = 0;
-		chessboardWalker.turn('left',target);
-		chessboardWalker.go(target);
+		application.chessboardWalker.position = 0;
+		application.chessboardWalker.direction = 0;
+		application.chessboardWalker.turn('left',target);
+		application.chessboardWalker.go(target);
 		hint.innerHTML = 'Moved';
 	}else if (order == 'mov rig') {
-		chessboardWalker.position = 0;
-		chessboardWalker.direction = 0;
-		chessboardWalker.turn('right',target);
-		chessboardWalker.go(target);
+		application.chessboardWalker.position = 0;
+		application.chessboardWalker.direction = 0;
+		application.chessboardWalker.turn('right',target);
+		application.chessboardWalker.go(target);
 		hint.innerHTML = 'Moved';
 	}else if (order == 'mov top') {
-		chessboardWalker.position = -90;
-		chessboardWalker.turn('right',target);
-		chessboardWalker.direction = 0;
-		chessboardWalker.go(target);
+		application.chessboardWalker.position = -90;
+		application.chessboardWalker.turn('right',target);
+		application.chessboardWalker.direction = 0;
+		application.chessboardWalker.go(target);
 		hint.innerHTML = 'Moved';
 	}else if (order == 'mov bot') {
-		chessboardWalker.position = 0;
-		chessboardWalker.direction = 0;
-		chessboardWalker.turn('back',target);
-		chessboardWalker.go(target);
+		application.chessboardWalker.position = 0;
+		application.chessboardWalker.direction = 0;
+		application.chessboardWalker.turn('back',target);
+		application.chessboardWalker.go(target);
 		hint.innerHTML = 'Moved';
 	}else{
 		hint.style.color = 'red';
@@ -122,4 +122,8 @@ OrderList.prototype.errorHint = function() {
 	var blocks = $$('.commander-block');
 	blocks[this.lines].style.backgroundColor = '#EB7A77';
 	blocks[this.lines].style.color = '#FFF';
+};
+
+OrderList.prototype.scroll = function() {
+	$('#commander-lines').style.top = -event.target.scrollTop + 'px';
 };
