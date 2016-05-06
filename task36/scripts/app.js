@@ -1,46 +1,6 @@
  $ = function (el) { return document.querySelector(el); };
  $$ = function (el) { return document.querySelectorAll(el); };
 
-var chessboardWalker = new ChessboardWalker(),
-    orderList = new OrderList(),
-	run = $('#run'),
-	refresh = $('#refresh');
-
-window.onload = function () {
-	var mapbuilder = new MapBuilder()
-	mapbuilder.build();
-	mapbuilder.drawAxis();
-	chessboardWalker.show(mapbuilder);
-}
-
-window.onclick =function () {
-	var target = $("#target");
-	switch (event.target)
-	{
-		case run :
-			orderList.getOrders();
-            orderList.runOrders();
-			break;
-		case refresh :
-			$('#order').value = '';
-            orderList.orders = [];
-			break;
-	}
-}
-
-$('#order').oninput = function () {
-	orderList.commblock();
-	orderList.scroll();
-}
-$('#boxnum').onchange = function () {
-	var mapbuilder = new MapBuilder(),
-		chessboardWalker = new ChessboardWalker(),
-		orderList = new OrderList();
-	mapbuilder.build();
-	mapbuilder.drawAxis();
-	chessboardWalker.show(mapbuilder);
-}
-
 function Application() {
 	this.mapBuilder = new MapBuilder();
 	this.chessboardWalker = new ChessboardWalker();
@@ -54,4 +14,35 @@ function Application() {
 
 	this.init();
 }
-new Application();
+/*
+ *初始化，绑定所有事件
+ */
+Application.prototype.init = function() {
+		this.mapBuilder.build();
+		this.mapBuilder.drawAxis();
+		this.chessboardWalker.show(this.mapBuilder);
+	this.$order.addEventListener('input',function () {
+		application.orderList.commblock();
+	})
+	this.$order.addEventListener('scroll',function () {
+		application.orderList.scroll();
+	})
+	this.$run.addEventListener('click',function () {
+		application.orderList.getOrders();
+        application.orderList.runOrders();
+	})
+	this.$refresh.addEventListener('click',function () {
+		$('#order').value = '';
+        application.orderList.orders = [];
+	})
+	this.$boxnum.addEventListener('change',function () {
+		application.mapBuilder = new MapBuilder();
+		application.chessboardWalker = new ChessboardWalker();
+		application.orderList = new OrderList();
+		application.mapBuilder.build();
+		application.mapBuilder.drawAxis();
+		application.chessboardWalker.show(application.mapBuilder);
+	})
+};
+
+var application = new Application();

@@ -95,8 +95,8 @@ button:hover
 }
 #commander-area
 {
-	overflow: hidden;
 	height: 760px;
+	min-width: 370px;
 }
 #order
 {
@@ -120,6 +120,7 @@ button:hover
 	width: 40px;
 	background-color: #0f2540;
 	float: left;
+	overflow: hidden;
 }
 #commander-lines
 {
@@ -159,9 +160,15 @@ div#target
 	background-color: #A5DEE4;
 	box-sizing: border-box;
 	position: absolute;
-	transition: all 1s;
-	-ms-transition: all 1s;
-	-webkit-transition: all 1s;
-	-o-transition: all 1s;
-	-moz-transition: all 1s;
+	transition: all 0.3s;
+	-ms-transition: all 0.3s;
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+}
+
+div.wall
+{
+	box-sizing: border-box;
+	position: absolute;
 }
