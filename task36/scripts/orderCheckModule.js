@@ -112,13 +112,14 @@ OrderList.prototype.runlist = function(order) {
 	}else if (order == 'build') {
 		application.chessboardWalker.buildWall();
 		application.chessboardWalker.showWall();
+	}else if (order.split(' ')[0] === 'bru' && order.split(' ').length == 2 && /^#[0-9a-fA-F]{6}$/.test(order.split(' ')[1])) {
+		application.chessboardWalker.brushWall(order.split(' ')[1]);
 	}else{
 		hint.style.color = 'red';
 		hint.innerHTML = 'Error';
 		this.error = true;
 		this.lines = this.orders.indexOf(order);
 		this.errorHint();
-		console.log(this.error);
 	}
 };
 

@@ -1,6 +1,7 @@
 function WallBuilder() {
     this.wall = [];
     this.wallnum = 0;
+    this.wallID = [];
 }
 
 WallBuilder.prototype.buildWall = function(chessboardWalker) {
