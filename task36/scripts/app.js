@@ -5,12 +5,14 @@ function Application() {
 	this.mapBuilder = new MapBuilder();
 	this.chessboardWalker = new ChessboardWalker();
 	this.orderList = new OrderList();
+	this.navigater = new Navigater();
 
 	this.$run = $('#run');
 	this.$refresh = $('#refresh');
 	this.$target = $("#target");
 	this.$order = $('#order');
 	this.$boxnum = $('#boxnum');
+	this.$build = $('#buildwall');
 
 	this.init();
 }
@@ -42,6 +44,10 @@ Application.prototype.init = function() {
 		application.mapBuilder.build();
 		application.mapBuilder.drawAxis();
 		application.chessboardWalker.show(application.mapBuilder);
+	})
+	this.$build.addEventListener('click',function () {
+		application.chessboardWalker.randomWall();
+		application.chessboardWalker.showWall();
 	})
 };
 

@@ -7,7 +7,6 @@ function ChessboardWalker() {//小格子的原型对象
 	this.orders = [];
 
 	this.wall = [];//记录每堵墙的信息
-    this.wallnum = 0;//记录墙的总数
     this.wallID = [];//记录每堵墙的ID
 }
 	
@@ -112,7 +111,6 @@ ChessboardWalker.prototype.translation = function (path,target) {
 
 ChessboardWalker.prototype.buildWall = function() {
 	var wall = new Object();
-    wall.name = 'wall' + this.wallnum;
     wall.size = this.blockSize;
     switch (this.direction) 
     {
@@ -177,7 +175,22 @@ ChessboardWalker.prototype.buildWall = function() {
     }
     this.wall.push(wall);
     this.wallID.push(wallID);
-	this.wallnum ++;
+};
+
+ChessboardWalker.prototype.randomWall = function() {
+	var wall = new Object();
+		xx = 0;
+    wall.size = this.blockSize;
+    wall.x = (Math.round((application.mapBuilder.blockNum - 1)* Math.random()) + 1) * this.blockSize;
+    wall.y = (Math.round((application.mapBuilder.blockNum - 1)* Math.random()) + 1) * this.blockSize;
+    var wallID = wall.x.toString() + ':' + wall.y.toString();
+    if (this.wallID.indexOf(wallID) != -1) 
+    {
+    	console.log("Error！There's already a wall here!")
+    	return;
+    }
+    this.wall.push(wall);
+    this.wallID.push(wallID);
 };
 
 ChessboardWalker.prototype.showWall = function() {

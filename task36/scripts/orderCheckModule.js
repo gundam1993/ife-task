@@ -15,7 +15,7 @@ OrderList.prototype.getOrders = function () {
 		if (orderUnit.length === 1 && orderUnit[0] !== '') {
 			orders.push(rawOrders[i].trim().toLowerCase());
 		}else{
-			if (parseInt(lastUnit) && orderUnit[0] != 'tun') {
+			if (parseInt(lastUnit) && orderUnit[0] != 'tun' && orderUnit[1] != 'to') {
 				var trueOrder = rawOrders[i].substring(0,rawOrders[i].length - lastUnit.length);
 				for (var j = 0; j < parseInt(lastUnit); j++) {
 					orders.push(trueOrder.trim().toLowerCase());
@@ -112,8 +112,13 @@ OrderList.prototype.runlist = function(order) {
 	}else if (order == 'build') {
 		application.chessboardWalker.buildWall();
 		application.chessboardWalker.showWall();
-	}else if (order.split(' ')[0] === 'bru' && order.split(' ').length == 2 && /^#[0-9a-fA-F]{6}$/.test(order.split(' ')[1])) {
+	}else if (order.split(' ')[0] === 'bru' && order.split(' ').length == 2 && /^#[0-9]{1,2}$/.test(order.split(' ')[1])) {
 		application.chessboardWalker.brushWall(order.split(' ')[1]);
+	}else if (order.substring(0,6) === 'mov to' && order.split(' ').length == 3 && /^([1-9]|(1[0-9])|20),([1-9]|(1[0-9])|20)$/.test(order.split(' ')[2])) {
+		console.log(order.split(' ')[2]);
+		application.navigater.getNodePosition();
+		var x = application.navigater.heuristic(order.split(' ')[2]);
+		console.log(x);
 	}else{
 		hint.style.color = 'red';
 		hint.innerHTML = 'Error';
