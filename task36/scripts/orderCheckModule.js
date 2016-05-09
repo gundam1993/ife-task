@@ -31,19 +31,19 @@ OrderList.prototype.getOrders = function () {
 	this.orders = orders;
 };
 
-OrderList.prototype.runOrders = function () {
+OrderList.prototype.runOrders = function (chessboardWalker) {
 	var order = this.orders,
 		that = this,
 		hint = $('#hint'),
 		i = 0;
 		hint.style.color = 'green';	
 	var x = setInterval(function () {
-			that.runlist(order[i]);
+			that.runlist(order[i],chessboardWalker);
 			i++;
 			if (i == order.length || that.error == true) {
 				clearInterval(x);
 			}
-		},300);
+		},100);
 };
 
 OrderList.prototype.commblock = function() {
@@ -58,65 +58,66 @@ OrderList.prototype.commblock = function() {
    	$('#commander-lines').innerHTML = html;
 };
 
-OrderList.prototype.runlist = function(order) {
+OrderList.prototype.runlist = function(order,chessboardWalker) {
+	console.log(order);
 	var	hint = $('#hint');
 		hint.style.color = 'green';
 	if (order == 'go') {
-		application.chessboardWalker.go(target);
+		chessboardWalker.go(target);
 		hint.innerHTML = 'Moved';
 	}else if (order == 'tun lef') {
-		application.chessboardWalker.turn('left',target);
+		chessboardWalker.turn('left',target);
 		hint.innerHTML = 'Turned';
 	}else if (order == 'tun rig') {
-		application.chessboardWalker.turn('right',target);
+		chessboardWalker.turn('right',target);
 		hint.innerHTML = 'Turned';
 	}else if (order == 'tun bac') {
-		application.chessboardWalker.turn('back',target);
+		chessboardWalker.turn('back',target);
 		hint.innerHTML = 'Turned';
 	}else if (order == 'tra lef') {
-		application.chessboardWalker.translation('lef',target);
+		chessboardWalker.translation('lef',target);
 		hint.innerHTML = 'Moved';
 	}else if (order == 'tra rig') {
-		application.chessboardWalker.translation('rig',target);
+		chessboardWalker.translation('rig',target);
 		hint.innerHTML = 'Moved';
 	}else if (order == 'tra top') {
-		application.chessboardWalker.translation('top',target);
+		chessboardWalker.translation('top',target);
 		hint.innerHTML = 'Moved';
 	}else if (order == 'tra bot') {
-		application.chessboardWalker.translation('bot',target);
+		chessboardWalker.translation('bot',target);
 		hint.innerHTML = 'Moved';
 	}else if (order == 'mov rig') {
-		application.chessboardWalker.position = 0;
-		application.chessboardWalker.direction = 2;
-		application.chessboardWalker.turn('left',target);
-		application.chessboardWalker.go(target);
+		chessboardWalker.position = 0;
+		chessboardWalker.direction = 2;
+		chessboardWalker.turn('left',target);
+		chessboardWalker.go(target);
 		hint.innerHTML = 'Moved';
 	}else if (order == 'mov lef') {
-		application.chessboardWalker.position = 0;
-		application.chessboardWalker.direction = 2;
-		application.chessboardWalker.turn('right',target);
-		application.chessboardWalker.go(target);
+		chessboardWalker.position = 0;
+		chessboardWalker.direction = 2;
+		chessboardWalker.turn('right',target);
+		chessboardWalker.go(target);
 		hint.innerHTML = 'Moved';
 	}else if (order == 'mov bot') {
-		application.chessboardWalker.position = -90;
-		application.chessboardWalker.turn('right',target);
-		application.chessboardWalker.direction = 2
-		application.chessboardWalker.go(target);
+		chessboardWalker.position = -90;
+		chessboardWalker.turn('right',target);
+		chessboardWalker.direction = 2
+		chessboardWalker.go(target);
 		hint.innerHTML = 'Moved';
 	}else if (order == 'mov top') {
-		application.chessboardWalker.position = 0;
-		application.chessboardWalker.direction = 2;
-		application.chessboardWalker.turn('back',target);
-		application.chessboardWalker.go(target);
+		chessboardWalker.position = 0;
+		chessboardWalker.direction = 2;
+		chessboardWalker.turn('back',target);
+		chessboardWalker.go(target);
 		hint.innerHTML = 'Moved';
 	}else if (order == 'build') {
-		application.chessboardWalker.buildWall();
-		application.chessboardWalker.showWall();
-	}else if (order.split(' ')[0] === 'bru' && order.split(' ').length == 2 && /^#[0-9]{1,2}$/.test(order.split(' ')[1])) {
-		application.chessboardWalker.brushWall(order.split(' ')[1]);
+		chessboardWalker.buildWall();
+		chessboardWalker.showWall();
+	}else if (order.split(' ')[0] === 'bru' && order.split(' ').length == 2 && /^#[0-9a-fA-F]{6}$/.test(order.split(' ')[1])) {
+		chessboardWalker.brushWall(order.split(' ')[1]);
 	}else if (order.substring(0,6) === 'mov to' && order.split(' ').length == 3 && /^([1-9]|(1[0-9])|20),([1-9]|(1[0-9])|20)$/.test(order.split(' ')[2])) {
 		console.log(order.split(' ')[2]);
-		application.navigater.getNodePosition();
+		navigater.getNodePosition();
 		var x = application.navigater.heuristic(order.split(' ')[2]);
 		console.log(x);
 	}else{
@@ -136,4 +137,9 @@ OrderList.prototype.errorHint = function() {
 
 OrderList.prototype.scroll = function() {
 	$('#commander-lines').style.top = -event.target.scrollTop + 'px';
+};
+
+OrderList.prototype.refresh = function() {
+	$('#order').value = '';
+    this.orders = [];
 };

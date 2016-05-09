@@ -5,7 +5,7 @@ function Application() {
 	this.mapBuilder = new MapBuilder();
 	this.chessboardWalker = new ChessboardWalker();
 	this.orderList = new OrderList();
-	this.navigater = new Navigater();
+	//this.navigater = new Navigater();
 
 	this.$run = $('#run');
 	this.$refresh = $('#refresh');
@@ -19,36 +19,30 @@ function Application() {
 /*
  *初始化，绑定所有事件
  */
-Application.prototype.init = function() {
-		this.mapBuilder.build();
-		this.mapBuilder.drawAxis();
-		this.chessboardWalker.show(this.mapBuilder);
-	this.$order.addEventListener('input',function () {
-		application.orderList.commblock();
-	})
-	this.$order.addEventListener('scroll',function () {
-		application.orderList.scroll();
-	})
-	this.$run.addEventListener('click',function () {
-		application.orderList.getOrders();
-        application.orderList.runOrders();
-	})
-	this.$refresh.addEventListener('click',function () {
-		$('#order').value = '';
-        application.orderList.orders = [];
-	})
-	this.$boxnum.addEventListener('change',function () {
-		application.mapBuilder = new MapBuilder();
-		application.chessboardWalker = new ChessboardWalker();
-		application.orderList = new OrderList();
-		application.mapBuilder.build();
-		application.mapBuilder.drawAxis();
-		application.chessboardWalker.show(application.mapBuilder);
-	})
-	this.$build.addEventListener('click',function () {
-		application.chessboardWalker.randomWall();
-		application.chessboardWalker.showWall();
-	})
+Application.prototype.run = function() {
+	this.orderList.getOrders();
+    this.orderList.runOrders(this.chessboardWalker);
 };
 
-var application = new Application();
+Application.prototype.changeMap = function() {
+	this.mapBuilder = new MapBuilder();
+	this.chessboardWalker = new ChessboardWalker();
+	this.orderList = new OrderList();
+	this.mapBuilder.build();
+	this.mapBuilder.drawAxis();
+	this.chessboardWalker.show(this.mapBuilder);
+};
+
+Application.prototype.init = function() {
+	this.mapBuilder.build();
+	this.mapBuilder.drawAxis();
+	this.chessboardWalker.show(this.mapBuilder);
+	this.$order.addEventListener('input',this.orderList.commblock.bind(this));
+	this.$order.addEventListener('scroll',this.orderList.scroll.bind(this));
+	this.$run.addEventListener('click',this.run.bind(this));
+	this.$refresh.addEventListener('click',this.orderList.refresh.bind(this));
+	this.$boxnum.addEventListener('change',this.changeMap.bind(this));
+	this.$build.addEventListener('click',this.chessboardWalker.randomWall.bind(this.chessboardWalker))
+};
+
+new Application();

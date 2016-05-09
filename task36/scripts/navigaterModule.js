@@ -1,36 +1,28 @@
-function Navigater(x,y,t) {
-    this.x = x;
-    this.y = y;
-    this.solid = t;
-    this.coord = x+':'+y;
-    this.neighbours = function (goal) {
-        var n = [];
-
-        var dir = [[0,1],[0,-1],[1,0],[-1,0]];
-        for (var i = 0; i < dir.length; i++) {
-            if (this.x + dir[i][0] < 0 || this.x + dir[i][0] > 19) continue;
-            if (this.y + dir[i][1] < 0 || this.y + dir[i][1] > 19) continue;
-
-            var p = map[this.x + dir[i][0]][this.y + dir[i][1]];
-
-            if (p.solid && p !=goal) continue;
-            n.push(p);
-        }
-        return n;
-    }
+function Navigater() {
+    this.start = [1,1]
+    this.open = [];
+    this.closed = [];
 }
 
 Navigater.prototype.getNodePosition = function() {
-    var chessboardWalker = application.chessboardWalker;
-    this.X = chessboardWalker.x / chessboardWalker.blockSize;
-    this.Y = chessboardWalker.y / chessboardWalker.blockSize;
+    var chessboardWalker = this.chessboardWalker;
+    this.start = [chessboardWalker.x / chessboardWalker.blockSize,chessboardWalker.y / chessboardWalker.blockSize]
+    this.x = chessboardWalker.x / chessboardWalker.blockSize;
+    this.y = chessboardWalker.y / chessboardWalker.blockSize;
+}
+
+function heuristic(goal) {
+    var dx = Math.abs(this.start[0] - parseInt(goal.split(',')[0])),
+        dy = Math.abs(this.start[1] - parseInt(goal.split(',')[1]));
+        return 10 * (dx + dy);
 };
 
-function heuristic(a,b) {
-    var dx = Math.abs(this.X - parseInt(goal.split(',')[0])),
-        dy = Math.abs(this.Y - parseInt(goal.split(',')[1]));
-        return (dx + dy);
-};
+function findPath(x,y,x2,y2) {
+    var start = [x,y],
+        goal = [x2,y2];
+
+    var closed = 
+}
 
 function pathFind(x,y,x2,y2) {
     var start = map[x][y];

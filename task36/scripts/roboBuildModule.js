@@ -191,6 +191,7 @@ ChessboardWalker.prototype.randomWall = function() {
     }
     this.wall.push(wall);
     this.wallID.push(wallID);
+    this.showWall();
 };
 
 ChessboardWalker.prototype.showWall = function() {
