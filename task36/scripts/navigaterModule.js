@@ -1,231 +1,75 @@
-function Navigater() {
-    this.start = [1,1]
+function PathNode(position,parent) {
+    this.position = position;
+    this.parent = parent || [0,0]
+    this.child = [];
+    this.f = 0;
+}
+
+PathNode.prototype.getChild = function(chessboardWalker) {
+    var offSets = [[0,1],[1,0],[0,-1],[-1,0]];
+    for (var i = 0; i < offSets.length; i++) {
+        var positionX = this.position[0] + offSets[i][0],
+            positionY = this.position[1] +  offSets[i][1],
+            positionID = positionX * chessboardWalker.blockSize + ':' + positionY * chessboardWalker.blockSize;
+        if (positionX > 0 && positionX <= 20 && positionY > 0 && positionY <= 20 && chessboardWalker.wallID.indexOf(positionID) === -1 && [positionX,positionY] !== this.parent) {
+            this.child.push([positionX,positionY]);
+        }   
+    }
+};
+
+function Navigater(goal) {
     this.open = [];
     this.closed = [];
+    this.goal = goal;
+    this.orderList = [];
 }
 
-Navigater.prototype.getNodePosition = function() {
-    var chessboardWalker = this.chessboardWalker;
-    this.start = [chessboardWalker.x / chessboardWalker.blockSize,chessboardWalker.y / chessboardWalker.blockSize]
-    this.x = chessboardWalker.x / chessboardWalker.blockSize;
-    this.y = chessboardWalker.y / chessboardWalker.blockSize;
-}
-
-function heuristic(goal) {
-    var dx = Math.abs(this.start[0] - parseInt(goal.split(',')[0])),
-        dy = Math.abs(this.start[1] - parseInt(goal.split(',')[1]));
-        return 10 * (dx + dy);
+Navigater.prototype.heuristic = function(position) {
+    var dx = Math.abs(position[0] - parseInt(this.goal[0])),
+        dy = Math.abs(position[1] - parseInt(this.goal[1]));
+    return 10 * (dx + dy);
 };
 
-function findPath(x,y,x2,y2) {
-    var start = [x,y],
-        goal = [x2,y2];
-
-    var closed = 
-}
-
-function pathFind(x,y,x2,y2) {
-    var start = map[x][y];
-    var goal = map[x2][y2];
-
-    var closed = {};
-    var open = [start];
-
-    var g_score = {};
-    var f_score = {};
-
-    g_score[start.coord] = 0;
-    f_score[start.coord] = heuristic(start,goal);
-
-    var cameFrom = {};
-
-    var sortFn = function (b,a) {
-        return f_score[a.coord] - f_score[b.coord];
-    };
-
-    while (open.length > 0) {
-        var node = open.pop();
-        if (node = goal) {
-            var path = [goal];
-            while (cameFrom[path[path.length - 1].coord]) {
-                path.push(cameFrom[path[path.length - 1].coord])
-            }
-            return path;
-        }
-        closed[node.coord] = true;
-
-        var neighbours = node.neighbours(goal);
-        for (var i = 0,c = neighbours.length; i < c; i++) {
-            var next = neighbours[i];
-            if (closed[next.coord]) continue;
-
-            var temp_g_score = g_score[node.coord] + 1;
-            var isBetter = false;
-
-            var idx = open.indexOf(next);
-            if (idx < 0) {
-                isBetter = true;
-                    nodesSearched ++
-            }else if (temp_g_score < g_score[next.coord]) {
-                open.splice(idx,1);
-                isBetter = true;
-            }
-
-            if (isBetter) {
-                cameFrom[next.coord] = node;
-                g_score[next.coord] = temp_g_score;
-                f_score[next.coord] = g_score[next.coord] + heuristic(next,goal);
-
-                open.insertSorted(next,sortFn);
+Navigater.prototype.astar = function(node,chessboardWalker) {
+    node.getChild(chessboardWalker);
+    var chosenNode = [],
+        chessboardWalker1 = chessboardWalker;
+    this.open.pop();
+    this.open.push(node.position); 
+    for (var i = 0; i < node.child.length; i++) {
+        var childs = new PathNode(node.child[i],node.position);
+        childs.f = this.heuristic(childs.position) + 10;
+        if (chosenNode.length == 0) {
+            chosenNode.push(childs);
+        }else{
+            if (chosenNode[0].f > childs.f) {
+                this.closed.push(chosenNode[0]);
+                chosenNode = [childs];
+            }else{
+                this.closed.push(childs.position);
             }
         }
     }
-    return [];
+    this.open.push(chosenNode[0].position);
+    if (chosenNode[0].position[0] !== this.goal[0] || chosenNode[0].position[1] !== this.goal[1]) {
+        this.astar(chosenNode[0],chessboardWalker1);
+    }
+    
 };
 
-// global vars used to adjust the algorithm
-// not necessary for real use
-var map, allowDiagonals, diagonalCost, dotTiebreaker, badSorting;
-
-// insert sort for better priority queue performance
-Array.prototype.insertSorted = function(v, sortFn) {
-    if(this.length < 1 || sortFn(v, this[this.length-1]) >= 0) {
-        this.push(v);
-        return this;
-    }
-    for(var i=this.length-2; i>=0; --i) {
-        if(sortFn(v, this[i]) >= 0) {
-            this.splice(i+1, 0, v);
-            return this;
+Navigater.prototype.translateOrder = function() {
+    for (var i = 1; i < this.open.length; i++) {
+        var x = this.open[i][0] - this.open[i - 1][0],
+            y = this.open[i][1] - this.open[i - 1][1];
+        console.log(x);
+        if (x == 1 && y == 0) {
+            this.orderList.push('mov rig');
+        }else if (x == -1 && y == 0) {
+            this.orderList.push('mov lef');
+        }else if (x == 0 && y == 1) {
+            this.orderList.push('mov bot');
+        }else if (x == 0 && y == -1) {
+            this.orderList.push('mov top');
         }
     }
-    this.splice(0, 0, v);
-    return this;
-}
-
-// for comparison this insert sort uses > not >= thus inserting new nodes nearer the back
-// this provides much worse searching
-Array.prototype.insertSorted2 = function(v, sortFn) {
-    if(this.length < 1 || sortFn(v, this[this.length-1]) > 0) {
-        this.push(v);
-        return this;
-    }
-    for(var i=this.length-2; i>=0; --i) {
-        if(sortFn(v, this[i]) > 0) {
-            this.splice(i+1, 0, v);
-            return this;
-        }
-    }
-    this.splice(0, 0, v);
-    return this;
-}
-
-function Node(x, y, t) {
-    this.x = x;
-    this.y = y;
-    this.solid = t;
-    this.coord = x+":"+y;
-    this.neighbours = function(goal) {
-        var n = [];
-        
-        var dir=[[0,1],[0,-1],[1,0],[-1,0], [1,1],[-1,1],[1,-1],[-1,-1]];
-        for(var i=0;i<(allowDiagonals?8:4);++i) {
-            if(this.x+dir[i][0] < 0 || this.x+dir[i][0] > 19) continue;
-            if(this.y+dir[i][1] < 0 || this.y+dir[i][1] > 19) continue;
-            
-            var p = map[this.x+dir[i][0]][this.y+dir[i][1]];
-            
-            if(p.solid && p != goal) continue;
-            
-            n.push(p);
-        }
-        return n;
-    }
-}
-
-function h(a, b) {
-    var cross = 0;
-    if(dotTiebreaker) {
-        var dx1 = a.x - b.x
-        var dy1 = a.y - b.y
-        var dx2 = start.x - b.x
-        var dy2 = start.y - b.y
-        var cross = Math.abs(dx1*dy2 - dx2*dy1)
-    }
-    
-    if(allowDiagonals) {
-        var straight = Math.abs(Math.abs(a.x-b.x) - Math.abs(a.y-b.y));
-        var diagonal = Math.max(Math.abs(a.x-b.x), Math.abs(a.y-b.y)) - straight;
-        return straight + diagonalCost*diagonal + cross*0.001;
-        //return Math.max(Math.abs(a.x-b.x), Math.abs(a.y-b.y)); simple version
-    }
-    return Math.abs(a.x-b.x)+Math.abs(a.y-b.y) + cross*0.001;
-}
-
-function pathFind(x, y, x2, y2) {
-    var start = map[x][y];
-    var goal = map[x2][y2];
-    
-    var closed = {};
-    var open = [start];
-    
-    var g_score = {}; // distance from start along optimal path
-    var f_score = {}; // estimated distance from start to goal through node
-    
-    g_score[start.coord] = 0;
-    f_score[start.coord] = h(start, goal);
-    
-    var cameFrom = {};
-    
-    var sortFn = function(b, a) {return f_score[a.coord] - f_score[b.coord];};
-    
-    while(open.length > 0) {
-        var node = open.pop(); // node with lowest f score
-        if(node == goal) {
-            var path = [goal];
-            while(cameFrom[path[path.length-1].coord]) {
-                path.push(cameFrom[path[path.length-1].coord])
-            }
-            return path;
-        }
-        closed[node.coord] = true;
-        
-        var neighbours = node.neighbours(goal);
-        for(var i=0,c=neighbours.length;i<c;++i) {
-            var next = neighbours[i];
-            if(closed[next.coord]) continue;
-            
-            var diagonal = next.x != node.x && next.y != node.y;
-            
-            var temp_g_score = g_score[node.coord] + (diagonal?diagonalCost:1);
-            var isBetter = false;
-            
-            var idx = open.indexOf(next);
-            if(idx < 0) {
-                isBetter = true;
-                nodesSearched++;
-            }
-            else if(temp_g_score < g_score[next.coord]) {
-                open.splice(idx, 1); // remove old node
-                isBetter = true;
-            }
-            
-            if(isBetter) {
-                cameFrom[next.coord] = node;
-                g_score[next.coord] = temp_g_score;
-                f_score[next.coord] = g_score[next.coord] + h(next, goal);
-                
-                // add the new node or reinsert the old node
-                if(badSorting) open.insertSorted2(next, sortFn);
-                else open.insertSorted(next, sortFn);
-                                            
-                // drawing
-                var s = Math.floor(g_score[next.coord]*4);
-                ctx.fillStyle = 'rgb('+(255-s)+',255,'+s+')';
-                ctx.fillRect(next.x*10, next.y*10, 10, 10);
-            }
-        }
-    }
-    // fail
-    return [];
-}
+};

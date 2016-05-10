@@ -5,7 +5,6 @@ function Application() {
 	this.mapBuilder = new MapBuilder();
 	this.chessboardWalker = new ChessboardWalker();
 	this.orderList = new OrderList();
-	//this.navigater = new Navigater();
 
 	this.$run = $('#run');
 	this.$refresh = $('#refresh');
@@ -21,7 +20,7 @@ function Application() {
  */
 Application.prototype.run = function() {
 	this.orderList.getOrders();
-    this.orderList.runOrders(this.chessboardWalker);
+    this.orderList.runOrders(this.orderList.orders,this.chessboardWalker);
 };
 
 Application.prototype.changeMap = function() {
@@ -37,6 +36,7 @@ Application.prototype.init = function() {
 	this.mapBuilder.build();
 	this.mapBuilder.drawAxis();
 	this.chessboardWalker.show(this.mapBuilder);
+
 	this.$order.addEventListener('input',this.orderList.commblock.bind(this));
 	this.$order.addEventListener('scroll',this.orderList.scroll.bind(this));
 	this.$run.addEventListener('click',this.run.bind(this));

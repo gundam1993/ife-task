@@ -167,7 +167,7 @@ ChessboardWalker.prototype.buildWall = function() {
 				}
 			break;    
     }
-    var wallID = wall.x.toString() + ':' + wall.y.toString();
+    var wallID = wall.x + ':' + wall.y;
     if (this.wallID.indexOf(wallID) != -1) 
     {
     	console.log("Error！There's already a wall here!")
@@ -181,9 +181,9 @@ ChessboardWalker.prototype.randomWall = function() {
 	var wall = new Object();
 		xx = 0;
     wall.size = this.blockSize;
-    wall.x = (Math.round((application.mapBuilder.blockNum - 1)* Math.random()) + 1) * this.blockSize;
-    wall.y = (Math.round((application.mapBuilder.blockNum - 1)* Math.random()) + 1) * this.blockSize;
-    var wallID = wall.x.toString() + ':' + wall.y.toString();
+    wall.x = (Math.round((parseInt($('#boxnum').value) - 1)* Math.random()) + 1) * this.blockSize;
+    wall.y = (Math.round((parseInt($('#boxnum').value) - 1)* Math.random()) + 1) * this.blockSize;
+    var wallID = wall.x + ':' + wall.y;
     if (this.wallID.indexOf(wallID) != -1) 
     {
     	console.log("Error！There's already a wall here!")

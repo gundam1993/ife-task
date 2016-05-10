@@ -31,9 +31,8 @@ OrderList.prototype.getOrders = function () {
 	this.orders = orders;
 };
 
-OrderList.prototype.runOrders = function (chessboardWalker) {
-	var order = this.orders,
-		that = this,
+OrderList.prototype.runOrders = function (order,chessboardWalker) {
+	var that = this,
 		hint = $('#hint'),
 		i = 0;
 		hint.style.color = 'green';	
@@ -46,7 +45,7 @@ OrderList.prototype.runOrders = function (chessboardWalker) {
 		},100);
 };
 
-OrderList.prototype.commblock = function() {
+OrderList.prototype.commblock = function() {//编辑器部分的行标
 	var html = '',
 		orders = $('#order').value,
 		lines = orders.match(/\n/g);
@@ -116,10 +115,10 @@ OrderList.prototype.runlist = function(order,chessboardWalker) {
 	}else if (order.split(' ')[0] === 'bru' && order.split(' ').length == 2 && /^#[0-9a-fA-F]{6}$/.test(order.split(' ')[1])) {
 		chessboardWalker.brushWall(order.split(' ')[1]);
 	}else if (order.substring(0,6) === 'mov to' && order.split(' ').length == 3 && /^([1-9]|(1[0-9])|20),([1-9]|(1[0-9])|20)$/.test(order.split(' ')[2])) {
-		console.log(order.split(' ')[2]);
-		navigater.getNodePosition();
-		var x = application.navigater.heuristic(order.split(' ')[2]);
-		console.log(x);
+		var goal = [];
+		goal.push(parseInt(order.split(' ')[2].split(',')[0]));
+		goal.push(parseInt(order.split(' ')[2].split(',')[1]));
+		this.findPath(goal,chessboardWalker);
 	}else{
 		hint.style.color = 'red';
 		hint.innerHTML = 'Error';
@@ -142,4 +141,12 @@ OrderList.prototype.scroll = function() {
 OrderList.prototype.refresh = function() {
 	$('#order').value = '';
     this.orders = [];
+};
+
+OrderList.prototype.findPath = function(goal,chessboardWalker) {
+	var navigater = new Navigater(goal),
+	start = new PathNode([(chessboardWalker.x / chessboardWalker.blockSize),(chessboardWalker.y / chessboardWalker.blockSize)]);
+	navigater.astar(start,chessboardWalker);
+	navigater.translateOrder();
+	this.runOrders(navigater.orderList,chessboardWalker);
 };
