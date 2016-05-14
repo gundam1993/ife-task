@@ -31,7 +31,7 @@ Navigater.prototype.heuristic = function(position) {
     return (dx + dy);
 };
 
-Navigater.prototype.astarxx = function(startl,goall,chessboardWalker) {
+Navigater.prototype.astar = function(startl,goall,chessboardWalker) {
     var closedl = {},
         closedposition = [];
         openl = [],
@@ -55,34 +55,26 @@ Navigater.prototype.astarxx = function(startl,goall,chessboardWalker) {
         if (current.position[0] === goall.position[0] && current.position[1] === goall.position[1]) {
             return cameFrom;
         }
-        console.log(openl);
         openl.splice(openl.indexOf(current),1);
         openposition.splice(openposition.indexOf(current.position),1);
-        console.log(openl);
         closedl[current.position] = current.position;
-        console.log(closedl);
         for (var i = 0; i < current.child.length; i++) {
             var childs = new PathNode(current.child[i],current.position);
             var position = childs.position;
             if (closedl[position]) {
-                console.log(777)
                 continue;
             }
             var tentative_gScore =  current.f + dist_between(current,childs);
-            console.log(tentative_gScore);
             childs.f = this.heuristic(childs.position)
             if (openposition.indexOf(childs.position) < 0) {
                 openl.push(childs);
                 openposition.push(childs.position);
             }else if (tentative_gScore >= childs.f) {
-                console.log(777);
                 continue;
             }
             if (!cameFrom[childs.position]) {
                 cameFrom[childs.position] = current.position;
             }
-            console.log(cameFrom);
-            console.log('');
         }
     }
     console.log("failure");

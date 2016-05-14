@@ -38,10 +38,6 @@ OrderList.prototype.runOrders = function (order,chessboardWalker) {
 		hint.style.color = 'green';	
 	var x = setInterval(function () {
 			that.runlist(order[i],chessboardWalker);
-			if (i > 0) {
-				$$(".commander-block")[i-1].style.backgroundColor = '';
-			}
-			$$(".commander-block")[i].style.backgroundColor = '#227D51';
 			i++;
 			if (i == order.length || that.error == true) {
 				clearInterval(x);
@@ -151,9 +147,8 @@ OrderList.prototype.findPath = function(goal,chessboardWalker) {
 	start = new PathNode([(chessboardWalker.x / chessboardWalker.blockSize),(chessboardWalker.y / chessboardWalker.blockSize)]);
 	goalN = new PathNode([goal[0],goal[1]]);
 	if (goal[0] != start.position[0] || goal[1] != start.position[1]) {
-		var a = navigater.astarxx(start,goalN,chessboardWalker);
+		var a = navigater.astar(start,goalN,chessboardWalker);
 		navigater.cameFrom(a,start.position,goalN.position);
-		console.log(navigater.open);
 		navigater.translateOrder();
 		this.runOrders(navigater.orderList,chessboardWalker);
 	}
