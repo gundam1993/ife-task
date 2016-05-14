@@ -38,6 +38,10 @@ OrderList.prototype.runOrders = function (order,chessboardWalker) {
 		hint.style.color = 'green';	
 	var x = setInterval(function () {
 			that.runlist(order[i],chessboardWalker);
+			if (i > 0) {
+				$$(".commander-block")[i-1].style.backgroundColor = '';
+			}
+			$$(".commander-block")[i].style.backgroundColor = '#227D51';
 			i++;
 			if (i == order.length || that.error == true) {
 				clearInterval(x);
@@ -58,7 +62,6 @@ OrderList.prototype.commblock = function() {//编辑器部分的行标
 };
 
 OrderList.prototype.runlist = function(order,chessboardWalker) {
-	console.log(order);
 	var	hint = $('#hint');
 		hint.style.color = 'green';
 	if (order == 'go') {
@@ -144,9 +147,14 @@ OrderList.prototype.refresh = function() {
 };
 
 OrderList.prototype.findPath = function(goal,chessboardWalker) {
-	var navigater = new Navigater(goal),
+	var navigater = new Navigater(goal,[(chessboardWalker.x / chessboardWalker.blockSize),(chessboardWalker.y / chessboardWalker.blockSize)]),
 	start = new PathNode([(chessboardWalker.x / chessboardWalker.blockSize),(chessboardWalker.y / chessboardWalker.blockSize)]);
-	navigater.astar(start,chessboardWalker);
-	navigater.translateOrder();
-	this.runOrders(navigater.orderList,chessboardWalker);
+	goalN = new PathNode([goal[0],goal[1]]);
+	if (goal[0] != start.position[0] || goal[1] != start.position[1]) {
+		var a = navigater.astarxx(start,goalN,chessboardWalker);
+		navigater.cameFrom(a,start.position,goalN.position);
+		console.log(navigater.open);
+		navigater.translateOrder();
+		this.runOrders(navigater.orderList,chessboardWalker);
+	}
 };
