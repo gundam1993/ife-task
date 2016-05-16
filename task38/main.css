@@ -1,0 +1,19 @@
+html,body
+{
+    background-color: #193e6c;
+    height:100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Lato', sans-serif;
+    margin: 0;
+}
+#main-block
+{
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 25px;
+    font-family: 'Lato', sans-serif;
+}
