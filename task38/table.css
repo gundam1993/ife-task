@@ -1,0 +1,47 @@
+#table
+{
+    text-align: center;
+    border-collapse: collapse;
+}
+
+td
+{
+    width: 150px;
+    height: 55px;
+    border: 1px solid #000;
+}
+
+.thead-td
+{
+    color: #FFF;
+    background-color: #777;
+    position: relative;
+}
+
+.tbody-td
+{
+
+}
+
+.arrow
+{
+    width: 0;
+    height: 0;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+}
+
+.upArrow
+{
+    border-bottom: 14px solid #FFF;
+    top: 12px;
+}
+
+.downArrow
+{
+    border-top: 14px solid #FFF;
+    bottom: 12px;
+}

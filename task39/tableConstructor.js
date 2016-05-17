@@ -1,65 +1,55 @@
 $ = function (el) { return document.querySelector(el); };
 $$ = function (el) { return document.querySelectorAll(el); };
 
-function TableConstructor(thead,tbody,lineFreeze,style) {
+/**
+ * 构建表格对象
+ * @param {Array} thead [表头数据]
+ * @param {Array} tbody [表格数据，每行的数据组成一个数组，再构成一个大数组]
+ */
+function TableConstructor(thead,tbody,lineFreeze) {
     this.target = $('#table');
-    this.defaultstyle = {
-        width : '150px',
-        height : '55px',
-        color : '#FFF',
-        backgroundColor : '#777',
-        border :  "1px solid #000000"
-    };
 
     this.thead = thead;
     this.tbody = tbody;
-    this.style = style || this.defaultstyle;
     this.lineFreeze = lineFreeze || false;
 
     this.init();
 }
 
-TableConstructor.prototype.addArrow = function(target,direction,className) {
+/**
+ * 添加箭头
+ * @param {node} target    [箭头的父节点]
+ * @param {string} className [剪头的类名，用于设置样式]
+ */
+TableConstructor.prototype.addArrow = function(target,className) {
     var arrow = document.createElement("div");
-    arrow.style.width = 0;
-    arrow.style.height = 0;
-    arrow.style.cursor = 'pointer';
-    arrow.style.position = "absolute";
-    arrow.style.right = '10px';
-    arrow.style.borderLeft = "7px solid transparent";
-    arrow.style.borderRight = "7px solid transparent";
-    arrow.className = className;
-    if (direction == 'up') {
-        arrow.style.borderBottom = "14px solid " + this.style.color;
-        arrow.style.top = '12px';
-        target.appendChild(arrow);
-    }else if (direction == 'down') {
-        arrow.style.borderTop = "14px solid " + this.style.color;
-        arrow.style.bottom = '12px';
-        target.appendChild(arrow);
-    }
+    arrow.className = className + " arrow";
+    target.appendChild(arrow);
 };
 
-TableConstructor.prototype.buildTableHead = function() {
-    this.target.style.borderCollapse = 'collapse';
-    this.target.style.textAlign = "center";
-    for (var i = 0; i < this.thead.length; i++) {
-        var td = document.createElement("td");
-        td.style.width = this.style.width;
-        td.style.height = this.style.height;
-        td.style.backgroundColor = this.style.backgroundColor;
-        td.style.color = this.style.color;
-        td.style.border = this.style.border;
-        td.style.position = "relative";
-        td.innerHTML = this.thead[i];
-        if (i > 0) {
-            this.addArrow(td,"up","upArrow");
-            this.addArrow(td,"down","downArrow");
+/**
+ * 添加表头
+ * @param thead  表头数据
+ */
+TableConstructor.prototype.buildTableHead = function(thead) {
+    if (thead) {
+            for (var i = 0; i < this.thead.length; i++) {
+            var td = document.createElement("td");
+            td.className = "thead-td";
+            td.innerHTML = this.thead[i];
+            if (i > 0) {
+                this.addArrow(td,"upArrow");
+                this.addArrow(td,"downArrow");
+            }
+            this.target.children[0].children[0].appendChild(td);
         }
-        this.target.children[0].children[0].appendChild(td);
     }
 };
 
+/**
+ * 添加表格本体
+ * @param tbody 表格数据
+ */
 TableConstructor.prototype.buildTableBody = function(tbody) {
     this.target.children[1].innerHTML = '';
     if (tbody) {
@@ -67,9 +57,7 @@ TableConstructor.prototype.buildTableBody = function(tbody) {
             var tr = document.createElement("tr");
             for (var j = 0; j < tbody[i].length; j++) {
                 var td = document.createElement("td");
-                td.style.width = this.style.width;
-                td.style.height = this.style.height;
-                td.style.border = this.style.border;
+                td.className = "tbody-td";
                 td.innerHTML = tbody[i][j];
                 tr.appendChild(td);
             }
@@ -78,16 +66,22 @@ TableConstructor.prototype.buildTableBody = function(tbody) {
     }
 };
 
+/**
+ * 排序函数
+ * @param  Node targetClassName 触发排序的按钮
+ * @param  {string} func  排序方法，传入"rise"为升序，传入"fall"为降序
+ */
 TableConstructor.prototype.sort = function(targetClassName,func) {
     var arrayForSort = [];
     var result = [];
+    var num = 0;
     for (var i = 0; i < targetClassName.length; i++) {
         if (targetClassName[i] === event.target) {
-            var num = i;
+            num = i;
         }
     }
-    for (var i = 0; i < this.tbody.length; i++) {
-        arrayForSort.push(this.tbody[i][num + 1]);
+    for (var j = 0; j < this.tbody.length; j++) {
+        arrayForSort.push(this.tbody[j][num + 1]);
     }
     var sortedArray = this.tbody.slice();
     if (func == "rise") {
@@ -95,29 +89,34 @@ TableConstructor.prototype.sort = function(targetClassName,func) {
     }else if (func =='fall') {
         sortedArray.sort(function (a,b) { return b[num + 1] - a[num + 1];});
     }
-    for (var i = 0; i < sortedArray.length; i++) {
-        var x = this.tbody.indexOf(sortedArray[i]);
+    for (var k = 0; k < sortedArray.length; k++) {
+        var x = this.tbody.indexOf(sortedArray[k]);
         result.push(this.tbody[x]);
     }
     this.buildTableBody(result);
 };
 
+/**
+ * 依靠设置表头的类名，应用不同的样式来实现首行冻结
+ */
 TableConstructor.prototype.frozenLine = function() {
     if (this.lineFreeze) {
         var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        if (this.target.offsetTop + this.target.offsetHeight - scrollTop < this.target.children[0].offsetHeight + 10) {
-            this.target.children[0].style.position = 'absolute';
+        if (this.target.offsetTop + this.target.offsetHeight - scrollTop < this.target.children[0].offsetHeight + 50) {
+            this.target.children[0].className = "oversea"
         }else if (this.target.offsetTop - scrollTop <= 0) {
-            this.target.children[0].style.position = 'fixed';
-            this.target.children[0].style.top = '-1px';
+            this.target.children[0].className = "freeze";
         }else if (this.target.offsetTop - scrollTop > 0) {
-            this.target.children[0].style.position = 'inherit';
+            this.target.children[0].className = "unfreeze";
         }
     }
 };
 
+/**
+ * 初始化表格对象，绑定事件
+ */
 TableConstructor.prototype.init = function() {
-    this.buildTableHead();
+    this.buildTableHead(this.thead);
     this.buildTableBody(this.tbody);
     for (var i = 0; i < $$(".upArrow").length; i++) {
         $$(".upArrow")[i].addEventListener("click",this.sort.bind(this,$$(".upArrow"),"rise"));
@@ -128,4 +127,4 @@ TableConstructor.prototype.init = function() {
     window.addEventListener("scroll",this.frozenLine.bind(this));
 };
 
-new TableConstructor(["姓名","语文","数学","英语","总分"],[['小明',80,90,70,240],['小红',90,60,90,240],['小亮',60,100,70,230],['小黑',70,80,90,240],['小白',60,60,70,190],['小绿',90,70,80,240],['小黄',100,90,90,270],['小蓝',80,60,70,210]],true)
+new TableConstructor(["姓名","语文","数学","英语","总分"],[['小明',80,90,70,240],['小红',90,60,90,240],['小亮',60,100,70,230],['小黑',70,80,90,240],['小白',60,60,70,190],['小绿',90,70,80,240],['小黄',100,90,90,270],['小蓝',80,60,70,210]],true);
