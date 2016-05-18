@@ -1,4 +1,4 @@
-#calenderButton
+.calenderButton
 {
     margin: 0;
     height: 36px;
@@ -15,18 +15,18 @@
     -moz-osx-font-smoothing: grayscale;
     transition: background-color 0.3s ease-in-out;
 }
-#calenderButton:before
+.calenderButton:before
 {
     content: "\f073";
 }
-#calenderButton:hover
+.calenderButton:hover
 {
     background-color: #FFF;
     border: 2px solid #000;
     padding: 3px;
 }
 
-#dateInput
+.dateInput
 {
     width: 400px;
     height: 30px;
@@ -36,7 +36,7 @@
     margin-bottom: 0;
 }
 
-#calenderUnit
+.calenderUnit
 {
     background-color: rgba(85,85,85,0.7);
     color: #FFF;
@@ -56,7 +56,7 @@
     visibility: hidden;
 }
 
-#calenderUnit>div
+.calenderUnit>div
 {
     overflow: auto;
 } 
@@ -91,7 +91,7 @@
     line-height: 52px;
 }
 
-#calenderHead
+.calenderHead
 {
     text-align: left;
     margin-left: 15px;
@@ -103,7 +103,7 @@
     cursor: default;
 }
 
-#upArrow
+.upArrow
 {
     width: 0;
     height: 0;
@@ -116,7 +116,7 @@
     top: 20px;
 }
 
-#downArrow
+.downArrow
 {
     width: 0;
     height: 0;

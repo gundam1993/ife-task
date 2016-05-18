@@ -4,16 +4,43 @@ $$ = function (el) { return document.querySelectorAll(el); };
 /**
  * 日历对象构建函数
  */
-function Calender() {
-    this.target = $("#calenderUnit");
+function Calender(target) {
+    this.target = target;
     this.date = new Date();
 
     this.displayYear = this.date.getFullYear();
     this.displayMonth = this.date.getMonth();
     this.chosenDate = this.date.getDate();
 
+    this.calenderButton;
+    this.dateInput;
+    this.calenderUnit;
+    this.calenderHead;
+    this.calenderBody;
+    this.upArrow;
+    this.downArrow;
+
     this.init();
 }
+
+/**
+ * 构筑输入框，按钮以及表格容器
+ */
+Calender.prototype.buildInputBlock = function() {
+    this.calenderButton =  document.createElement("div"),
+    this.dateInput = document.createElement("input"),
+    this.calenderUnit = document.createElement("div");
+    this.calenderButton.className = "calenderButton";
+    this.dateInput.className = "dateInput";
+    this.dateInput.type = "text";
+    this.dateInput.name = "date";
+    this.calenderUnit.className = "calenderUnit hidden";
+    this.target.appendChild(this.calenderButton);
+    this.target.appendChild(this.dateInput);
+    this.target.appendChild(this.calenderUnit);
+
+};
+
 
 /**
  * 获取某个月的天数
@@ -29,9 +56,9 @@ Calender.prototype.getDays = function(year,month) {
  * 构建日历的头部部分
  */
 Calender.prototype.buildHead = function() {
-    var head = document.createElement('div');
-    head.id = "calenderHead";
-    head.innerHTML = this.displayYear + "-" + (this.displayMonth + 1);
+    this.calenderHead = document.createElement('div');
+    this.calenderHead.className = "calenderHead";
+    this.calenderHead.innerHTML = this.displayYear + "-" + (this.displayMonth + 1);
     var days = ["Su","Mo","Tu","We","Th","Fr","Sa"];
     var dayBlock = document.createElement('div');
     for (var i = 0; i < days.length; i++) {
@@ -40,17 +67,17 @@ Calender.prototype.buildHead = function() {
         div.className = "block days";
         dayBlock.appendChild(div);
     }
-    var body = document.createElement('div');
-    body.id = "calenderBody";
-    var upArrow = document.createElement("div");
-    upArrow.id ="upArrow";
-    var downArrow = document.createElement("div");
-    downArrow.id ="downArrow";
-    head.appendChild(upArrow);
-    head.appendChild(downArrow);
-    this.target.appendChild(head);
-    this.target.appendChild(dayBlock);
-    this.target.appendChild(body);
+    this.calenderBody = document.createElement('div');
+    this.calenderBody.className = "calenderBody";
+    this.upArrow = document.createElement("div");
+    this.upArrow.className ="upArrow";
+    this.downArrow = document.createElement("div");
+    this.downArrow.className ="downArrow";
+    this.calenderHead.appendChild(this.upArrow);
+    this.calenderHead.appendChild(this.downArrow);
+    this.calenderUnit.appendChild(this.calenderHead);
+    this.calenderUnit.appendChild(dayBlock);
+    this.calenderUnit.appendChild(this.calenderBody);
 };
 
 /**
@@ -64,7 +91,7 @@ Calender.prototype.buildcalendar = function() {
         for (var i = 0; i < day; i++) {
             var emptyDiv = document.createElement("div");
             emptyDiv.className = "block";
-            $("#calenderBody").appendChild(emptyDiv);
+            this.calenderBody.appendChild(emptyDiv);
         }
     }
     for (var j = 0; j < daysNum; j++) {
@@ -75,7 +102,7 @@ Calender.prototype.buildcalendar = function() {
              dayBlock.className += ' chosen';
              dayBlock.id = "today";
         }
-        $("#calenderBody").appendChild(dayBlock);
+        this.calenderBody.appendChild(dayBlock);
     }
 };
 
@@ -102,21 +129,21 @@ Calender.prototype.changeMonth = function(change,event) {
     }else{
         this.chosenDate =  '';
     }
-    $("#calenderUnit").innerHTML = "";
+    this.calenderUnit.innerHTML = "";
     this.buildHead();
     this.buildcalendar();
-    $("#upArrow").addEventListener("click",this.changeMonth.bind(this,"minus"));
-    $("#downArrow").addEventListener("click",this.changeMonth.bind(this,"add"));
+    this.upArrow.addEventListener("click",this.changeMonth.bind(this,"minus"));
+    this.downArrow.addEventListener("click",this.changeMonth.bind(this,"add"));
 };
 
 /**
  * 控制日历模块的显示和隐藏
  */
 Calender.prototype.display = function() {
-    if ($(".hidden")) {
-        this.target.className = "";
+    if (this.calenderUnit.className == "calenderUnit hidden") {
+        this.calenderUnit.className = "calenderUnit";
     }else{
-        this.target.className = "hidden";
+        this.calenderUnit.className = "calenderUnit hidden";
     }
 };
 
@@ -125,18 +152,18 @@ Calender.prototype.display = function() {
  * @return {[type]} [description]
  */
 Calender.prototype.bindEvent = function() {
-    if (event.target == $("#upArrow")) {
+    if (event.target == this.upArrow) {
         this.changeMonth("minus");
-    }else if(event.target == $("#downArrow")) {
+    }else if(event.target == this.downArrow) {
         this.changeMonth("add");
     }else if (event.target.className == "block dayBlock") {
         if ($(".chosen")) {
             $(".chosen").className = "block dayBlock";
         }
         event.target.className += " chosen";
-        $("#calenderUnit").className = "hidden";
+        this.calenderUnit.className = "calenderUnit hidden";
         this.chosenDate = parseInt(event.target.innerHTML);
-        $("#dateInput").value = this.displayYear + "-" + (this.displayMonth + 1) + '-' + this.chosenDate;
+        this.dateInput.value = this.displayYear + "-" + (this.displayMonth + 1) + '-' + this.chosenDate;
         var chosen = this.returnDate();
         console.log(chosen);
     }
@@ -154,14 +181,14 @@ Calender.prototype.returnDate = function() {
  * 初始化日历，绑定事件
  */
 Calender.prototype.init = function() {
-
+    this.buildInputBlock();
     this.buildHead();
     this.buildcalendar();
-    $("#dateInput").value = this.displayYear + "-" + (this.displayMonth + 1) + '-' + this.chosenDate;
+    this.dateInput.value = this.displayYear + "-" + (this.displayMonth + 1) + '-' + this.chosenDate;
 
-    document.addEventListener("click",this.bindEvent.bind(this));
-    $("#calenderButton").addEventListener("click",this.display.bind(this));
-    $("#dateInput").addEventListener("click",this.display.bind(this));
+    this.target.addEventListener("click",this.bindEvent.bind(this));
+    this.calenderButton.addEventListener("click",this.display.bind(this));
+    this.dateInput.addEventListener("click",this.display.bind(this));
 };
 
-new Calender();
+new Calender($("#main-block"));
