@@ -72,7 +72,8 @@ Calender.prototype.buildcalendar = function() {
         dayBlock.innerHTML = j + 1;
         dayBlock.className = "block dayBlock";
         if (j + 1 == this.chosenDate && this.chosenDate == this.date.getDate()) {
-             dayBlock.id = 'chosen';
+             dayBlock.className += ' chosen';
+             dayBlock.id = "today";
         }
         $("#calenderBody").appendChild(dayBlock);
     }
@@ -115,8 +116,8 @@ Calender.prototype.init = function() {
     $("#downArrow").addEventListener("click",this.changeMonth.bind(this,"add"));
     $("#calenderUnit").onclick = function (event) {
         if (event.target.className == "block dayBlock") {
-            $("#chosen").id = "";
-            event.target.id = 'chosen';
+            $(".chosen").className = "block dayBlock";
+            event.target.className += " chosen";
         }
     };
 };
