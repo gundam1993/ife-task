@@ -40,8 +40,8 @@ function Calender(target,chosentype,maxRange) {
  * 构建日历的输入框部分以及日历容器
  */
 Calender.prototype.buildInputBlock = function() {
-    this.calenderButton =  document.createElement("div"),
-    this.dateInput = document.createElement("input"),
+    this.calenderButton =  document.createElement("div");
+    this.dateInput = document.createElement("input");
     this.calenderUnit = document.createElement("div");
     this.calenderButton.className = "calenderButton";
     this.dateInput.className = "dateInput";
@@ -235,7 +235,7 @@ Calender.prototype.chooseRange = function(event) {
  * @return {obj} 日期对象
  */
 Calender.prototype.returnDate = function() {
-    this.point = new Date(this.displayYear,this.displayMonth,this.chosenDate)
+    this.point = new Date(this.displayYear,this.displayMonth,this.chosenDate);
     return this.point;
 };
 
@@ -269,8 +269,8 @@ Calender.prototype.bindEvent = function() {
             this.changeMonth("add");
             break;
         case this.confirmBtn :
-            this.dateInput.value = this.range.startDate.getFullYear() + "-" + (this.range.startDate.getMonth() + 1) + '-' + this.range.startDate.getDate() + " —— " + this.range.endDate.getFullYear() + "-" + (this.range.endDate.getMonth() + 1) + '-' + this.range.endDate.getDate()
-            this.display()
+            this.dateInput.value = this.range.startDate.getFullYear() + "-" + (this.range.startDate.getMonth() + 1) + '-' + this.range.startDate.getDate() + " —— " + this.range.endDate.getFullYear() + "-" + (this.range.endDate.getMonth() + 1) + '-' + this.range.endDate.getDate();
+            this.display();
             break;
         case this.cancelBtn :
             var points = this.target.getElementsByClassName('chosen');
