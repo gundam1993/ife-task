@@ -1,0 +1,18 @@
+html,body
+{
+    background-color: #193e6c;
+    height:100%;
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Lato', sans-serif;
+}
+body>div
+{
+    width: 1000px;
+    height: 800px;
+    background-color: #FFF;
+    margin: 30px;
+}
