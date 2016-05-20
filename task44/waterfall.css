@@ -1,0 +1,40 @@
+.waterfall
+{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: row nowrap;
+}
+
+.waterfall-colunms
+{
+    background-color: #000;
+    min-height: 100px;
+    height: 100%;
+}
+
+.pic-box
+{
+    width: 100%;
+    background-color: blue;
+    padding: 10px;
+    box-shadow: 5px 5px 5px #111;
+    box-sizing: border-box;
+    margin: 15px 0;
+    background-color: #FFF;
+    color: #000;
+}
+
+.pic-box img
+{
+    width: 100%;
+    cursor: pointer;
+}
+
+#mask
+{
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
