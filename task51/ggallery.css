@@ -37,6 +37,8 @@ html,body
     -moz-transition: all 0.3s;
 }
 
+
+/*PUZZLE layout*/
 .puzzle-1,
 .puzzle-2,
 .puzzle-3,
@@ -51,6 +53,7 @@ html,body
 .ggalleryBox
 {
     position: relative;
+    box-sizing: border-box;
 }
 
 .puzzle-1 img,
@@ -190,4 +193,27 @@ html,body
 {
     width: 33.4%;
     float: right;
+}
+
+/*WaterFall layout*/
+.waterfall
+{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: row nowrap;
+}
+
+.ggalleryWaterfallColunms
+{
+    min-height: 10px;
+    height: 100%;
+    width: 100%;
+}
+
+
+
+.ggalleryWaterfallColunms .ggalleryBox img
+{
+    width: 100%;
+    cursor: pointer;
 }

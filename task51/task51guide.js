@@ -36,40 +36,40 @@
     };
 
     var _createFullscreen = function (event) {
-      if (event.target.getAttribute('src').trim()) {
-        var fullscreen = document.createElement("div"),
-        img = document.createElement("img"),
-        body = document.querySelector("body");
-        fullscreen.id = "fullscreen";
-        fullscreen.className = "hidden";
-        img.src = event.target.src;
-        img.id = "bigPic";
-        fullscreen.appendChild(img);
-        body.appendChild(fullscreen);
-    }
+        if (event.target.getAttribute('src').trim()) {
+            var fullscreen = document.createElement("div"),
+            img = document.createElement("img"),
+            body = document.querySelector("body");
+            fullscreen.id = "fullscreen";
+            fullscreen.className = "hidden";
+            img.src = event.target.src;
+            img.id = "bigPic";
+            fullscreen.appendChild(img);
+            body.appendChild(fullscreen);
+        }
     };
 
+    var _puzzleStyleFix = function (picBox,parent) {
+        var len = picBox.length;
+        switch (len) {
+            case 3 :
+                picBox[1].style.width = picBox[1].offsetHeight +"px";
+                picBox[2].style.width = picBox[2].offsetHeight +"px";
+                picBox[0].style.width = parent.offsetWidth - picBox[1].offsetWidth + "px";
+                break;
+            case 5 :
+                picBox[1].style.height = picBox[1].offsetWidth + "px";
+                picBox[4].style.height = parent.offsetHeight - picBox[1].offsetHeight + "px";
+                break;
+            default :
+                for (var i = 0; i < len; i++) {
+                    picBox[i].style.height = "";
+                    picBox[i].style.width = "";
+                }
+        }
+    };
+    
     /************* 以下是本库提供的公有方法 *************/
-
-
-    /**
-     * 设置整个相册的布局与样式
-     */
-    Ggallery.prototype.setStyle = function(opt) {
-        var opt = opt || {};
-        _options.layout = opt.layout || 2;
-        _options.fullscreenState = opt.fullscreenState || true;
-        _options.puzzleHeight = opt.puzzleHeight || 800;
-        _options.coulumn = opt.coulumn || 4;
-        _options.heightMin = opt.heightMin || 300;
-        _options.gutter = opt.gutter || 10;
-        _options.mdSquareSize = opt.mdSquareSize || 300;
-        _options.smSquareSize = opt.smSquareSize || 150;
-        console.log(_options);
-        _createFullscreen(123);
-    };
-
-
 
     /**
      * 初始化并设置相册
@@ -77,13 +77,26 @@
      * @param {(string|string[])} image  一张图片的 URL 或多张图片 URL 组成的数组
      * @param {object}            option 配置项
      */
-    Ggallery.prototype.setImage = function (image) {
+    Ggallery.prototype.setImage = function (image,opt) {
         if (typeof image === 'string') {
             // 包装成数组处理
             this.setImage([image]);
             return;
         }
+        this.container.innerHTML = "";
+
+        var _opt = opt || {};
+        _options.layout = _opt.layout || 2;
+        _options.fullscreenState = _opt.fullscreenState || true;
+        _options.puzzleHeight = _opt.puzzleHeight || 800;
+        _options.coulumn = _opt.coulumn || 4;
+        _options.heightMin = _opt.heightMin || 300;
+        _options.gutter = _opt.gutter || 10;
+        _options.mdSquareSize = _opt.mdSquareSize || 300;
+        _options.smSquareSize = _opt.smSquareSize || 150;
         
+        this.setLayout(_options.layout);
+        this.addImage(image);
     };
 
 
@@ -97,7 +110,27 @@
         return document.querySelector(".ggalleryBox");
     };
 
+    Ggallery.prototype.preLoad = function(url,i) {
+        var img = new Image();
+        img.src = url[i];
+        console.log(img);
+        if (img.complete) {
+            this.preLoadX(img,url,i);
+        }else{
+            img.addEventListener("load",this.preLoadX.bind(this,img,url,i));
+        }  
+    };
 
+    Ggallery.prototype.preLoadX = function(img,url,i) {
+        var container = document.createElement("div");
+        container.className = this.picBox;
+        container.appendChild(img);
+        _options.image.push(container);
+        //imageList.push(container);
+        if (i < url.length - 1) {
+            this.preLoad(url,i + 1);
+        }
+};
 
     /**
      * 向相册添加图片
@@ -105,25 +138,44 @@
      * @param {(string|string[])} image 一张图片的 URL 或多张图片 URL 组成的数组
      */
     Ggallery.prototype.addImage = function (image) {
-        for (var i = 0, len = image.length; i < len; i++) {
+        var imageList = [];
+        //this.preLoad(image,0);
+        for (var i = 0, leni = image.length; i < leni; i++) {
             var img = new Image(),
             container = document.createElement("div");
             img.src = image[i];
             container.className = this.picBox;
             container.appendChild(img);
             _options.image.push(container);
-            console.log(_options.image);
+            imageList.push(container);
         }
+       console.log(_options.image);
+        var picBox = imageList,
+            len = imageList.length;
         switch(_options.layout) {
             case 1 :
-        for (var j = 0,len = _options.image.length; j < len; j++) {
-            this.container.appendChild(_options.image[j]);
-        }
+                if (picBox.length > 6) {
+                    throw "PUZZLE layout only can contain 6 photos";
+                }
+                for (var j = 0; j < len; j++) {
+                    this.container.appendChild(picBox[j]);
+                    picBox[j].style.border = _options.gutter / 2 + "px solid transparent";
+                }
+                this.container.style.height = _options.puzzleHeight + "px";
+                this.container.className = this.containerSelector.slice(1) + ' puzzle-' + _options.image.length;
+                _puzzleStyleFix(_options.image,this.container);
+                break;
+            case 2 :
+                for (var k = 0; k < len; k++) {
+                    var targetCoulumn = this.getMinWaterfallCoulumn();
+                    console.log(targetCoulumn[0]);
+                    picBox[k].className = "ggalleryBox";
+                    targetCoulumn[0].appendChild(picBox[k]);
+                }
+                break;
         }
 
     };
-
-
 
     /**
      * 移除相册中的图片
@@ -142,19 +194,17 @@
      */
     Ggallery.prototype.setLayout = function (layout) {
         var picBox = _options.image;
-        this.container.innerHTML = '';
         _options.layout = layout || 2;
         switch(_options.layout) {
-            case 1 :
-                if (picBox.length > 6) {
-                    console.error('PUZZLE layout only can contain 6 photos');
-                    break;
-                }
-                this.container.style.height = _options.puzzleHeight + "px";
-                this.container.className = this.containerSelector.slice(1) + ' puzzle-' + picBox.length;
-                break;
             case 2 :
                 this.container.className = this.containerSelector.slice(1) + ' waterfall';
+                var len = _options.coulumn;
+                for (var i = 0; i < len; i++) {
+                    var coulumn = document.createElement("div");
+                    coulumn.className = "ggalleryWaterfallColunms";
+                    coulumn.id = "coulumn-" + (i + 1);
+                    this.container.appendChild(coulumn);
+                }
                 break;
                 
         }
@@ -214,6 +264,18 @@
     };
 
 
+    Ggallery.prototype.getMinWaterfallCoulumn = function() {
+        var colunms = document.querySelectorAll(".ggalleryWaterfallColunms"),
+        colunmsArr = [];
+        for (var i = 0; i < colunms.length; i++) {
+            colunmsArr.push(colunms[i]);
+        }
+        var sortedColunms = colunmsArr.sort(function (a,b) {
+            return a.offsetHeight - b.offsetHeight;
+        });
+        return sortedColunms;
+    };
+
     /**
      * 设置木桶模式每行图片数的上下限
      * @param {number} min 最少图片数（含）
@@ -233,25 +295,6 @@
 
 
 
-    /**
-     * 获取木桶模式每行图片数的上限
-     * @return {number} 最多图片数（含）
-     */
-    Ggallery.prototype.getBarrelBinMax = function () {
-
-    };
-
-
-
-    /**
-     * 获取木桶模式每行图片数的下限
-     * @return {number} 最少图片数（含）
-     */
-    Ggallery.prototype.getBarrelBinMin = function () {
-
-    };
-
-
 
     /**
      * 设置木桶模式每行高度的上下限，单位像素
@@ -263,17 +306,6 @@
     };
 
 
-
-    /**
-     * 获取木桶模式每行高度的上限
-     * @return {number} 最多图片数（含）
-     */
-    Ggallery.prototype.getBarrelHeightMax = function () {
-
-    };
-
-
-
     /**
      * 获取木桶模式每行高度的下限
      * @return {number} 最少图片数（含）
@@ -282,12 +314,7 @@
 
     };
 
-
-
-    // 你想增加的其他接口
-
-
-
+    
     /************* 以上是本库提供的公有方法 *************/
 
 
