@@ -29,11 +29,13 @@
         coulumn : '',
         heightMin : '',
         gutter : '',
-        mdSquareSize:'',
-        smSquareSize:'',
+        SquareSize:'',
         fullscreenState : '',
         image: []
     };
+
+    var _barrelBinAspectRationow = 0,
+        _barrelBinCheckedImg = [];
 
     var _createFullscreen = function (event) {
         if (event.target.getAttribute('src').trim()) {
@@ -92,8 +94,7 @@
         _options.coulumn = _opt.coulumn || 4;
         _options.heightMin = _opt.heightMin || 300;
         _options.gutter = _opt.gutter || 10;
-        _options.mdSquareSize = _opt.mdSquareSize || 300;
-        _options.smSquareSize = _opt.smSquareSize || 150;
+        _options.SquareSize = _opt.SquareSize || 25;
         _options.image = [];
         
         this.setLayout(_options.layout);
@@ -108,30 +109,8 @@
      * @return {HTMLElement[]} 相册所有图像对应的 DOM 元素组成的数组
      */
     Ggallery.prototype.getImageDomElements = function() {
-        return document.querySelector(".ggalleryBox");
+        return document.querySelectorAll(".ggalleryBox");
     };
-
-    Ggallery.prototype.preLoad = function(url,i) {
-        var img = new Image();
-        img.src = url[i];
-        console.log(img);
-        if (img.complete) {
-            this.preLoadX(img,url,i);
-        }else{
-            img.addEventListener("load",this.preLoadX.bind(this,img,url,i));
-        }  
-    };
-
-    Ggallery.prototype.preLoadX = function(img,url,i) {
-        var container = document.createElement("div");
-        container.className = this.picBox;
-        container.appendChild(img);
-        _options.image.push(container);
-        //imageList.push(container);
-        if (i < url.length - 1) {
-            this.preLoad(url,i + 1);
-        }
-};
 
     /**
      * 向相册添加图片
@@ -142,9 +121,9 @@
         var img = new Image(),
         picBox = document.createElement("div");
         img.src = image[i];
+        picBox.style.border = _options.gutter / 2 + "px solid transparent";
         picBox.className = this.picBox;
         picBox.appendChild(img);
-        picBox.style.border = _options.gutter / 2 + "px solid transparent";
         _options.image.push(picBox);
         switch(_options.layout) {
             case 1 :
@@ -158,9 +137,19 @@
                 break;
             case 2 :
                 var targetCoulumn = this.getMinWaterfallCoulumn();
-                console.log(targetCoulumn[0]);
                 targetCoulumn[0].appendChild(picBox);
                 break;
+            case 3 :
+                if (img.complete) {
+                    this.initBarrelBin(img,picBox,i,image.length);
+                }else{
+                    img.addEventListener("load",this.initBarrelBin.bind(this,img,picBox,i,image.length));
+                }              
+                break;
+            case 4 :
+                picBox.style.width = _options.SquareSize + "%";
+                this.container.appendChild(picBox);
+                picBox.style.height = picBox.offsetWidth + "px";
         }
         if (i < image.length - 1) {
             if (img.complete) {
@@ -200,6 +189,13 @@
                     this.container.appendChild(coulumn);
                 }
                 break;
+            case 3 :
+                this.container.className = this.containerSelector.slice(1) + " barrel";
+                //var row = document.createElement("div");
+                //row.className = "ggalleryBarrelBinRows";
+                break;
+            case 4 :
+                this.container.className = this.containerSelector.slice(1) + " square";
                 
         }
     };
@@ -224,7 +220,13 @@
      * @param {number} [y] 图片之间的纵向间距，如果是 undefined 则等同于 x
      */
     Ggallery.prototype.setGutter = function (x, y) {
-
+        if (y === undefined) {
+            y = x;
+        }
+        var picBox = this.getImageDomElements();
+        for (var i = 0, len = picBox.length; i < len; i++) {
+            picBox[i].style.borderWidth = y / 2 + "px " + x / 2 + "px";
+        }
     };
 
 
@@ -270,23 +272,6 @@
         return sortedColunms;
     };
 
-    /**
-     * 设置木桶模式每行图片数的上下限
-     * @param {number} min 最少图片数（含）
-     * @param {number} max 最多图片数（含）
-     */
-    Ggallery.prototype.setBarrelBin = function (min, max) {
-
-        // 注意异常情况的处理，做一个健壮的库
-        if (min === undefined || max === undefined || min > max) {
-            console.error('...');
-            return;
-        }
-
-        // 你的实现
-
-    };
-
 
 
 
@@ -295,7 +280,7 @@
      * @param {number} min 最小高度
      * @param {number} max 最大高度
      */
-    Ggallery.prototype.setBarrelHeight = function (min, max) {
+    Ggallery.prototype.setBarrelHeight = function (height) {
 
     };
 
@@ -304,10 +289,41 @@
      * 获取木桶模式每行高度的下限
      * @return {number} 最少图片数（含）
      */
-    Ggallery.prototype.getBarrelHeightMin = function () {
-
+    Ggallery.prototype.getBarrelHeight = function () {
+        return _options.heightMin;
     };
 
+    Ggallery.prototype.initBarrelBin = function(img,picBox,picno,piclen) {
+        _barrelBinAspectRationow += ((img.width + 10) / img.height);
+        var ar = this.container.offsetWidth / _options.heightMin;
+        var image = "";
+        var row = document.createElement("div");
+        row.className = "ggalleryBarrelBinRows";
+        row.style.width = "100%";
+        if (_barrelBinAspectRationow < ar) {
+            _barrelBinCheckedImg.push(picBox);  
+        }else{
+            _barrelBinCheckedImg.push(picBox);
+            for (var i = 0,len = _barrelBinCheckedImg.length; i < len; i++) {
+                    image = _barrelBinCheckedImg[i].children[0];
+                    _barrelBinCheckedImg[i].style.width = ((image.width + 10) / image.height * (this.container.offsetWidth / _barrelBinAspectRationow)) + "px";
+                    row.appendChild(_barrelBinCheckedImg[i]);
+                }
+            this.container.appendChild(row);
+            row.style.height = (this.container.offsetWidth / _barrelBinAspectRationow) + "px";
+            _barrelBinCheckedImg = [];
+            _barrelBinAspectRationow = 0;
+        }
+        if (picno === piclen - 1) {
+            for (var j = 0,lenj = _barrelBinCheckedImg.length; j < lenj; j++) {
+                    image = _barrelBinCheckedImg[j].children[0];
+                    _barrelBinCheckedImg[j].style.width = ((image.width + 10) / image.height * (this.container.offsetWidth / ar)) + "px";
+                    row.appendChild(_barrelBinCheckedImg[j]);
+                    this.container.appendChild(row);
+            }
+        }
+
+    };
     
     /************* 以上是本库提供的公有方法 *************/
 
