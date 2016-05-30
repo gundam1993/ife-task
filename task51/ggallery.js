@@ -37,17 +37,38 @@
     var _barrelBinAspectRationow = 0,
         _barrelBinCheckedImg = [];
 
-    var _createFullscreen = function (event) {
+    var _createFullscreen = function () {
         if (event.target.getAttribute('src').trim()) {
             var fullscreen = document.createElement("div"),
-            img = document.createElement("img"),
-            body = document.querySelector("body");
+                img = document.createElement("img"),
+                leftArrow = document.createElement("div"),
+                rightArrow = document.createElement("div"),
+                body = document.querySelector("body");
             fullscreen.id = "fullscreen";
-            fullscreen.className = "hidden";
+            leftArrow.id = "leftArrow";
+            rightArrow.id = "rightArrow";
             img.src = event.target.src;
             img.id = "bigPic";
             fullscreen.appendChild(img);
+            fullscreen.appendChild(leftArrow);
+            fullscreen.appendChild(rightArrow);
             body.appendChild(fullscreen);
+            setTimeout(function () {
+                var bigPic = document.querySelector("#bigPic");
+                bigPic.style.transform = 'translate(-50%, -50%)';
+            },10);
+            fullscreen.onclick = function () {
+                var fullscreen = document.querySelector("#fullscreen"),
+                    leftArrow = document.querySelector("#leftArrow"),
+                    rightArrow = document.querySelector("#rightArrow"),
+                    bigPic = document.querySelector("#bigPic");
+                if (event.target !== leftArrow && event.target !== rightArrow && event.target !== bigPic) {
+                    bigPic.style.transform = 'translate(-50%, -50%) scale(0.01,0.01)';
+                    setTimeout(function () {
+                        fullscreen.remove();
+                    },300);
+                }
+            };
         }
     };
 
@@ -236,6 +257,7 @@
      */
     Ggallery.prototype.enableFullscreen = function () {
         _options.fullscreenState = true;
+        //_createFullscreen();
         this.container.addEventListener('click', _createFullscreen, false);
     };
 
