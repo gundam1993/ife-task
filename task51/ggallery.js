@@ -13,8 +13,6 @@
             BARREL: 3,     // 木桶布局
             SQUARE: 4       //  正方形布局
         };
-        // 公有变量可以写在这里
-        // this.xxx = ...
         this.containerSelector = id || "#ggalleryContainer";
         this.container = document.querySelector(this.containerSelector);
         this.picBox = "ggalleryBox";
@@ -29,16 +27,18 @@
         coulumn : '',
         heightMin : '',
         gutter : '',
-        SquareSize:'',
+        squareSize:'',
         fullscreenState : '',
-        image: []
+        image: [],
+        imageUrl: [],
+        imageNum: '',
+        barrelBinAspectRationow : 0,
+        barrelBinCheckedImg : []
     };
 
-    var _barrelBinAspectRationow = 0,
-        _barrelBinCheckedImg = [];
 
     var _createFullscreen = function () {
-        if (event.target.getAttribute('src').trim()) {
+        if (event.target.getAttribute('src')) {
             var fullscreen = document.createElement("div"),
                 img = document.createElement("img"),
                 leftArrow = document.createElement("div"),
@@ -48,26 +48,53 @@
             leftArrow.id = "leftArrow";
             rightArrow.id = "rightArrow";
             img.src = event.target.src;
-            img.id = "bigPic";
+            img.className = "bigPic";
+            img.id = event.target.id;
             fullscreen.appendChild(img);
             fullscreen.appendChild(leftArrow);
             fullscreen.appendChild(rightArrow);
             body.appendChild(fullscreen);
             setTimeout(function () {
-                var bigPic = document.querySelector("#bigPic");
+                var bigPic = document.querySelector(".bigPic");
                 bigPic.style.transform = 'translate(-50%, -50%)';
             },10);
             fullscreen.onclick = function () {
                 var fullscreen = document.querySelector("#fullscreen"),
                     leftArrow = document.querySelector("#leftArrow"),
                     rightArrow = document.querySelector("#rightArrow"),
-                    bigPic = document.querySelector("#bigPic");
+                    bigPic = document.querySelector(".bigPic"),
+                    pics = document.querySelectorAll(".images"),
+                    target = event.target;
                 if (event.target !== leftArrow && event.target !== rightArrow && event.target !== bigPic) {
                     bigPic.style.transform = 'translate(-50%, -50%) scale(0.01,0.01)';
                     setTimeout(function () {
                         fullscreen.remove();
                     },300);
                 }
+                
+                if (event.target === leftArrow && bigPic.id !== "Pic1") {
+                    var newidl ="Pic" + (bigPic.id.slice(3) - 1);
+                    bigPic.remove();
+                    var newbigPicl = new Image(),
+                        newPicl = document.querySelector("#" + newidl);
+                    newbigPicl.src = newPicl.src;
+                    newbigPicl.className = "bigPic";
+                    newbigPicl.id = newidl;
+                    newbigPicl.style.transform = 'translate(-50%, -50%)';
+                    fullscreen.appendChild(newbigPicl);
+                }
+                if (event.target === rightArrow && bigPic.id !== "Pic" + (_options.imageNum)) {
+                    var newidr ="Pic" + (parseInt(bigPic.id.slice(3)) + 1);
+                    bigPic.remove();
+                    var newbigPicr = new Image(),
+                        newPicr = document.querySelector("#" + newidr);
+                    newbigPicr.src = newPicr.src;
+                    newbigPicr.id = newidr;
+                    newbigPicr.className = "bigPic";
+                    newbigPicr.style.transform = 'translate(-50%, -50%)';
+                    fullscreen.appendChild(newbigPicr);
+                }
+                
             };
         }
     };
@@ -114,9 +141,13 @@
         _options.puzzleHeight = _opt.puzzleHeight || 800;
         _options.coulumn = _opt.coulumn || 4;
         _options.heightMin = _opt.heightMin || 300;
-        _options.gutter = _opt.gutter || 10;
-        _options.SquareSize = _opt.SquareSize || 25;
+        _options.gutter = _opt.gutter || 0;
+        _options.squareSize = _opt.squareSize || 25;
         _options.image = [];
+        _options.imageUrl = [];
+        _options.imageNum = 0;
+        _options.barrelBinAspectRationow = 0;
+        _options.barrelBinCheckedImg = [];
         
         this.setLayout(_options.layout);
         this.addImage(image,0);
@@ -142,8 +173,12 @@
         var img = new Image(),
         picBox = document.createElement("div");
         img.src = image[i];
+        _options.imageUrl.push(image[i]);
+        _options.imageNum ++;
         picBox.style.border = _options.gutter / 2 + "px solid transparent";
         picBox.className = this.picBox;
+        img.id = "Pic" + _options.imageNum;
+        img.className = "images";
         picBox.appendChild(img);
         _options.image.push(picBox);
         switch(_options.layout) {
@@ -168,7 +203,7 @@
                 }              
                 break;
             case 4 :
-                picBox.style.width = _options.SquareSize + "%";
+                picBox.style.width = _options.squareSize + "%";
                 this.container.appendChild(picBox);
                 picBox.style.height = picBox.offsetWidth + "px";
         }
@@ -186,8 +221,10 @@
      * @param  {(HTMLElement|HTMLElement[])} image 需要移除的图片
      * @return {boolean} 是否全部移除成功
      */
-    Ggallery.prototype.removeImage = function (image) {
-
+    Ggallery.prototype.removeImage = function (imageNum) {
+        var deletePic = _options.imageUrl[imageNum];
+        _options.imageUrl.splice(imageNum,1);
+        this.setImage(_options.imageUrl,_options);
     };
 
 
@@ -212,12 +249,9 @@
                 break;
             case 3 :
                 this.container.className = this.containerSelector.slice(1) + " barrel";
-                //var row = document.createElement("div");
-                //row.className = "ggalleryBarrelBinRows";
                 break;
             case 4 :
-                this.container.className = this.containerSelector.slice(1) + " square";
-                
+                this.container.className = this.containerSelector.slice(1) + " square";      
         }
     };
 
@@ -257,7 +291,6 @@
      */
     Ggallery.prototype.enableFullscreen = function () {
         _options.fullscreenState = true;
-        //_createFullscreen();
         this.container.addEventListener('click', _createFullscreen, false);
     };
 
@@ -295,18 +328,6 @@
     };
 
 
-
-
-    /**
-     * 设置木桶模式每行高度的上下限，单位像素
-     * @param {number} min 最小高度
-     * @param {number} max 最大高度
-     */
-    Ggallery.prototype.setBarrelHeight = function (height) {
-
-    };
-
-
     /**
      * 获取木桶模式每行高度的下限
      * @return {number} 最少图片数（含）
@@ -316,35 +337,42 @@
     };
 
     Ggallery.prototype.initBarrelBin = function(img,picBox,picno,piclen) {
-        _barrelBinAspectRationow += ((img.width + 10) / img.height);
+        _options.barrelBinAspectRationow += ((img.width + 10) / img.height);
         var ar = this.container.offsetWidth / _options.heightMin;
         var image = "";
         var row = document.createElement("div");
         row.className = "ggalleryBarrelBinRows";
         row.style.width = "100%";
-        if (_barrelBinAspectRationow < ar) {
-            _barrelBinCheckedImg.push(picBox);  
+        if (_options.barrelBinAspectRationow < ar) {
+            _options.barrelBinCheckedImg.push(picBox);  
         }else{
-            _barrelBinCheckedImg.push(picBox);
-            for (var i = 0,len = _barrelBinCheckedImg.length; i < len; i++) {
-                    image = _barrelBinCheckedImg[i].children[0];
-                    _barrelBinCheckedImg[i].style.width = ((image.width + 10) / image.height * (this.container.offsetWidth / _barrelBinAspectRationow)) + "px";
-                    row.appendChild(_barrelBinCheckedImg[i]);
+            _options.barrelBinCheckedImg.push(picBox);
+            for (var i = 0,len = _options.barrelBinCheckedImg.length; i < len; i++) {
+                    image = _options.barrelBinCheckedImg[i].children[0];
+                    _options.barrelBinCheckedImg[i].style.width = ((image.width + 10) / image.height * (this.container.offsetWidth / _options.barrelBinAspectRationow)) + "px";
+                    row.appendChild(_options.barrelBinCheckedImg[i]);
                 }
             this.container.appendChild(row);
-            row.style.height = (this.container.offsetWidth / _barrelBinAspectRationow) + "px";
-            _barrelBinCheckedImg = [];
-            _barrelBinAspectRationow = 0;
+            row.style.height = (this.container.offsetWidth / _options.barrelBinAspectRationow) + "px";
+            _options.barrelBinCheckedImg = [];
+            _options.barrelBinAspectRationow = 0;
         }
         if (picno === piclen - 1) {
-            for (var j = 0,lenj = _barrelBinCheckedImg.length; j < lenj; j++) {
-                    image = _barrelBinCheckedImg[j].children[0];
-                    _barrelBinCheckedImg[j].style.width = ((image.width + 10) / image.height * (this.container.offsetWidth / ar)) + "px";
-                    row.appendChild(_barrelBinCheckedImg[j]);
+            for (var j = 0,lenj = _options.barrelBinCheckedImg.length; j < lenj; j++) {
+                    image = _options.barrelBinCheckedImg[j].children[0];
+                    _options.barrelBinCheckedImg[j].style.width = (image.width * _options.heightMin / image.height) + "px";
+                    row.appendChild(_options.barrelBinCheckedImg[j]);
                     this.container.appendChild(row);
             }
         }
-
+        var rows = document.querySelectorAll(".ggalleryBarrelBinRows");
+        if (rows) {
+            for (var k = 0; k < rows.length; k++) {
+                if (rows[k].children.length === 0) {
+                    this.container.removeChild(rows[k]);
+                }
+            }
+        }
     };
     
     /************* 以上是本库提供的公有方法 *************/

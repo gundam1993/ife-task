@@ -57,9 +57,10 @@ html,body
     border-left:  80px solid #999;
 }
 
-#bigPic
+.bigPic
 {
     height: 80%;
+    max-width: 70%;
     position: absolute;
     top: 50%;
     left: 50%;
