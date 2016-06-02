@@ -4,7 +4,13 @@ var style = {
     gutter : 10,
     squareSize : 20
 };
+var setting = document.querySelector("#setting");
 
 var a = new Ggallery("#ggalleryContainer");
 a.setImage(imgs,style);
 a.enableFullscreen();
+
+setting.onclick = function () {
+    var controler = document.querySelector("#controler");
+    controler.className === "hidden" ? controler.className = "" : controler.className += "hidden";
+};

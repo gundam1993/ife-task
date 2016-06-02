@@ -1,5 +1,122 @@
+html,body
+{
+    width: 100%;
+    margin: 0;
+    background-color: #34495e;
+    font-family: Helvetica,Tahoma,Arial,STXihei,\\534E\6587\7EC6\9ED1,Microsoft YaHei,\\5FAE\8F6F\96C5\9ED1,SimSun,\\5B8B\4F53,Heiti,\\9ED1\4F53,sans-serif;
+}
+
+header
+{
+    width: 100%;
+    height: 60px;
+    background-color: #FFF;
+    border-bottom: 2px solid rgba(1,1,1,0,7);
+    text-align: center;
+    z-index: 10;
+    position: fixed;
+    top: 0;
+}
+
+#setting
+{
+    width: 40px;
+    margin: 10px 50px;
+    height: 40px;
+    border-radius: 6px;
+    border: 1px solid #DDD;
+    float: left;
+    outline: none;
+    background-color: white;
+    text-align: center;
+    cursor: pointer;
+    transition: color,background-color 0.2s ease-in-out;
+}
+
+#setting:hover
+{
+    background-color: #000;
+    color: #FFF;
+    transition: color,background-color 0.2s ease-in-out;
+}
+
+#setting i
+{
+    display: block;
+    margin: auto;
+}
+
+
+header h3
+{
+    line-height: 60px;
+    display: inline-block;
+    font-size: 30px;
+    font-weight: lighter;
+    cursor: default;
+    margin: 0;
+    text-align: center;
+    transform: translate(-50%,0);
+}
+
 #ggalleryContainer
 {
     width: 70%;
     margin: auto;
+    margin-top: 80px;
+}
+#controler
+{
+    width: 300px;
+    min-height: 200px;
+    position: fixed;
+    top: 100px;
+    left: 20px;
+    background-color: rgba(0,0,0,0.3);
+    color: #FFF;
+    padding: 20px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+#controler span
+{
+    display: block;
+    border-bottom: 4px solid #FFF;
+    font-size: 24px;
+    line-height: 30px;
+    margin-bottom: 10px;
+}
+
+.layout
+{
+    width: 45%;
+    height: 40px;
+    margin: 5px auto;
+    background-color: rgba(0,0,0,0.3);
+    outline: none;
+    border: 2px solid #FFF;
+    color: #FFF;
+    font-size: 24px;
+    line-height: 40px;
+    cursor: pointer;
+    transition: color,background-color 0.2s ease-in-out;
+}
+
+.layout:hover
+{
+    background-color: rgba(0,0,0,0.7);
+    transition: color,background-color 0.2s ease-in-out;
+}
+
+.layout:active
+{
+    cursor: default;
+}
+
+output {
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    color: #FFF;
 }

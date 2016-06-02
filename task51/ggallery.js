@@ -36,7 +36,9 @@
         barrelBinCheckedImg : []
     };
 
-
+    /**
+     * 创建全屏模式
+     */
     var _createFullscreen = function () {
         if (event.target.getAttribute('src')) {
             var fullscreen = document.createElement("div"),
@@ -99,6 +101,11 @@
         }
     };
 
+    /**
+     * 拼图模式图片数量为3和5时修正样式用
+     * @param  {Array} picBox 
+     * @param  {obj} parent 
+     */
     var _puzzleStyleFix = function (picBox,parent) {
         var len = picBox.length;
         switch (len) {
@@ -314,7 +321,10 @@
         return _options.fullscreenState;
     };
 
-
+    /**
+     * 获取瀑布布局下高度最小的一栏
+     * @return {array} 按高度倒序排布的数组
+     */
     Ggallery.prototype.getMinWaterfallCoulumn = function() {
         var colunms = document.querySelectorAll(".ggalleryWaterfallColunms"),
         colunmsArr = [];
@@ -336,6 +346,13 @@
         return _options.heightMin;
     };
 
+    /**
+     * 构成木桶布局
+     * @param  {obj} img    图片对象
+     * @param  {obj} picBox 图片+外层DIV对象
+     * @param  {int} picno  图片序号
+     * @param  {int} piclen 图片总数
+     */
     Ggallery.prototype.initBarrelBin = function(img,picBox,picno,piclen) {
         _options.barrelBinAspectRationow += ((img.width + 10) / img.height);
         var ar = this.container.offsetWidth / _options.heightMin;

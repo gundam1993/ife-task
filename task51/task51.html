@@ -2,13 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>TASK51</title>
+    <title>Ggallery.JS</title>
     <link rel="stylesheet" type="text/css" href="ggallery.css">
     <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="font-awesome.min.css">
 </head>
 <body>
+    <header>
+    <button id="setting"><i class="icon-cog icon-2x"></i></button>
+        <h3>Ggallery.JS</h3>
+    </header>
     <div id ="ggalleryContainer"></div>
-    <script type="text/javascript" src="ggallery.js"></script>
+    <div id="controler" class="hidden">
+        <span>Layout</span>
+        <button id="puzzle" class="layout">Puzzle</button>
+        <button id="waterfall" class="layout">Waterfall</button>
+        <button id="barrel" class="layout">Barrel</button>
+        <button id="square" class="layout">Square</button>
+        <span>Gutter</span>
+        <input type="range" name="gutter" min="0" max="100" id="gutterChanger">
+        <output id="gutterResult"></output>
+    </div>
+    <script type="text/javascript" src="ggallery.min.js"></script>
     <script type="text/javascript" src="app.js"></script>
 </body>
 </html>
