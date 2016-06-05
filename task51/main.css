@@ -13,21 +13,21 @@ header
     background-color: #FFF;
     border-bottom: 2px solid rgba(1,1,1,0,7);
     text-align: center;
-    z-index: 10;
+    z-index: 100;
     position: fixed;
     top: 0;
 }
 
 #setting
 {
-    width: 40px;
-    margin: 10px 50px;
-    height: 40px;
-    border-radius: 6px;
-    border: 1px solid #DDD;
+    width: 60px;
+    margin: 0;
+    height: 60px;
     float: left;
     outline: none;
-    background-color: white;
+    background-color: #FFF;
+    border: none;
+    color: #F75C2F;
     text-align: center;
     cursor: pointer;
     transition: color,background-color 0.2s ease-in-out;
@@ -35,7 +35,7 @@ header
 
 #setting:hover
 {
-    background-color: #000;
+    background-color: #F75C2F;
     color: #FFF;
     transition: color,background-color 0.2s ease-in-out;
 }
@@ -56,7 +56,6 @@ header h3
     cursor: default;
     margin: 0;
     text-align: center;
-    transform: translate(-50%,0);
 }
 
 #ggalleryContainer
@@ -65,58 +64,77 @@ header h3
     margin: auto;
     margin-top: 80px;
 }
+
 #controler
 {
-    width: 300px;
-    min-height: 200px;
+    width: 200px;
     position: fixed;
-    top: 100px;
-    left: 20px;
+    top: 60px;
     background-color: rgba(0,0,0,0.3);
     color: #FFF;
-    padding: 20px;
     text-align: center;
     box-sizing: border-box;
+    transform: translate(0,-100%);
+    transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    z-index: 20;
+    overflow: hidden;
 }
 
-#controler span
+#controler div
 {
-    display: block;
-    border-bottom: 4px solid #FFF;
-    font-size: 24px;
-    line-height: 30px;
-    margin-bottom: 10px;
+    width: 100%;
+    line-height: 45px;
+    text-align: left;
+    box-sizing: border-box;
+    transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    text-indent: 10px;
 }
 
-.layout
+.stylesControler
 {
-    width: 45%;
-    height: 40px;
-    margin: 5px auto;
-    background-color: rgba(0,0,0,0.3);
-    outline: none;
-    border: 2px solid #FFF;
-    color: #FFF;
-    font-size: 24px;
-    line-height: 40px;
-    cursor: pointer;
-    transition: color,background-color 0.2s ease-in-out;
+    text-align: center;
 }
 
-.layout:hover
+.stylesControler:hover
 {
-    background-color: rgba(0,0,0,0.7);
-    transition: color,background-color 0.2s ease-in-out;
+    background-color: #F75C2F; 
 }
 
-.layout:active
+#puzzleHeight,#barrelHeight,#squareSize
 {
+    overflow: hidden;
+}
+
+.choose
+{
+    background-color: #F75C2F;
+}
+
+.hidden
+{
+    display: none;
+}
+
+input
+{
+    width: 155px;
+}
+
+#layout,#fullscreen,#gutter,#puzzleHeight,#coulumn,#barrelHeight,#squareSize
+{
+    background-color: rgba(0,0,0,0.5);
     cursor: default;
 }
 
-output {
-    display: block;
-    font-size: 20px;
-    font-weight: bold;
-    color: #FFF;
+#addImage
+{
+    border-top: 1px solid rgba(200,200,200,0.5);
 }

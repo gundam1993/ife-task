@@ -46,9 +46,9 @@
                 leftArrow = document.createElement("div"),
                 rightArrow = document.createElement("div"),
                 body = document.querySelector("body");
-            fullscreen.id = "fullscreen";
-            leftArrow.id = "leftArrow";
-            rightArrow.id = "rightArrow";
+            fullscreen.id = "gGalleryFullscreen";
+            leftArrow.id = "gGalleryLeftArrow";
+            rightArrow.id = "gGalleryRightArrow";
             img.src = event.target.src;
             img.className = "bigPic";
             img.id = event.target.id;
@@ -61,9 +61,9 @@
                 bigPic.style.transform = 'translate(-50%, -50%)';
             },10);
             fullscreen.onclick = function () {
-                var fullscreen = document.querySelector("#fullscreen"),
-                    leftArrow = document.querySelector("#leftArrow"),
-                    rightArrow = document.querySelector("#rightArrow"),
+                var fullscreen = document.querySelector("#gGalleryFullscreen"),
+                    leftArrow = document.querySelector("#gGalleryLeftArrow"),
+                    rightArrow = document.querySelector("#gGalleryRightArrow"),
                     bigPic = document.querySelector(".bigPic"),
                     pics = document.querySelectorAll(".images"),
                     target = event.target;
@@ -141,6 +141,7 @@
             return;
         }
         this.container.innerHTML = "";
+        this.container.style.height = "";
 
         var _opt = opt || {};
         _options.layout = _opt.layout || 2;
@@ -158,6 +159,8 @@
         
         this.setLayout(_options.layout);
         this.addImage(image,0);
+
+        window.onresize = this.setImage.bind(this,_options.imageUrl,_options);
     };
 
 
@@ -262,7 +265,9 @@
         }
     };
 
-
+    Ggallery.prototype.getStyle = function() {
+        return _options;
+    };
 
     /**
      * 获取相册的布局
@@ -271,8 +276,6 @@
     Ggallery.prototype.getLayout = function() {
         return _options.layout;
     };
-
-
 
     /**
      * 设置图片之间的间距
@@ -290,6 +293,10 @@
             picBox[i].style.borderWidth = y / 2 + "px " + x / 2 + "px";
         }
     };
+
+    Ggallery.prototype.getGutter = function () {
+        return _options.gutter;
+    }
 
 
 
